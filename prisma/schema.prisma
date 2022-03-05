@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+}
+
+model Product {
+  product_id                       Int                             @id @default(autoincrement())
+  name                             String                          @db.Text
+  introduction_date                DateTime?
+  sales_discontinuation_date       DateTime?
+  support_discontinuation_date     DateTime?
+  comment                          String?                         @db.Text
+  is_good                          Boolean?
+  is_service                       Boolean?
+  product_category_classifications ProductCategoryClassification[]
+  product_feature_applicabilities  ProductFeatureApplicability[]
+}
+
+model ProductCategory {
+  product_category_id               Int                             @id @default(autoincrement())
+  description                       String                          @db.Text
+  products_category_classifications ProductCategoryClassification[]
+}
+
+model ProductCategoryClassification {
+  product             Product         @relation(fields: [product_id], references: [product_id])
+  product_id          Int
+  product_category    ProductCategory @relation(fields: [product_category_id], references: [product_category_id])
+  product_category_id Int
+  from_date           DateTime
+
+  @@id([product_id, product_category_id])
+}
+
+model ProductFeature {
+  product_feature_id              Int                           @id @default(autoincrement())
+  description                     String                        @db.Text
+  product_feature_applicabilities ProductFeatureApplicability[]
+}
+
+model ProductFeatureApplicability {
+  product_feature_id Int
+  product_feature    ProductFeature @relation(fields: [product_feature_id], references: [product_feature_id])
+  product_id         Int
+  product            Product        @relation(fields: [product_id], references: [product_id])
+  from_date          DateTime
+
+  @@id([product_id, product_feature_id])
+}

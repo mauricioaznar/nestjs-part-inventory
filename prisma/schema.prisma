@@ -16,24 +16,36 @@ model User {
   password String
 }
 
-
-
 model Part {
-  part_id                       Int                             @id @default(autoincrement())
-  name                             String                          @db.Text
-  comment                          String?                         @db.Text
-  components  PartComponent[] @relation("component")
-  parents  PartComponent[] @relation("parent")
+  part_id    Int             @id @default(autoincrement())
+  name       String          @db.Text
+  comment    String?         @db.Text
+  components PartComponent[] @relation("component")
+  parents    PartComponent[] @relation("parent")
+  additions  PartAddition[]  @relation("additions")
+  subtractions  PartSubtraction[]  @relation("subtractions")
 }
 
-
 model PartComponent {
-  parent    Part @relation("parent", fields: [parent_id], references: [part_id])
-  parent_id  Int
-  component   Part @relation("component", fields: [component_id], references: [part_id])
+  parent       Part @relation("parent", fields: [parent_id], references: [part_id])
+  parent_id    Int
+  component    Part @relation("component", fields: [component_id], references: [part_id])
   component_id Int
-  quantity Int
+  quantity     Int
 
   @@id([parent_id, component_id])
 }
 
+model PartAddition {
+  id       Int  @id @default(autoincrement())
+  part_id  Int
+  part     Part @relation("additions", fields: [part_id], references: [part_id])
+  quantity Int
+}
+
+model PartSubtraction {
+  id       Int  @id @default(autoincrement())
+  part_id  Int
+  part     Part @relation("subtractions", fields: [part_id], references: [part_id])
+  quantity Int
+}

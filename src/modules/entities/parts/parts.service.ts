@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../common/services/prisma/prisma.service';
-import { Part, PartInput } from './parts.dto';
-import { PartComponent } from '../part-components/part-components.dto';
+import { Part, PartInput } from '../../common/dto/entities/parts.dto';
+import { PartComponent } from '../../common/dto/entities/part-components.dto';
 
 @Injectable()
 export class PartsService {

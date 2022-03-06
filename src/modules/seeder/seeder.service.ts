@@ -1,8 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
 import { User } from '../auth/auth.dto';
-import { PartsService } from '../parts/parts/parts.service';
-import { PartComponentsService } from '../parts/part-components/part-components.service';
+import { PartsService } from '../entities/parts/parts.service';
+import { PartComponentsService } from '../entities/part-components/part-components.service';
+import { PartAdditionsService } from '../entities/part-additions/part-additions.service';
+import { PartSubtractionsService } from '../entities/part-subtractions/part-subtractions.service';
 
 @Injectable()
 export class SeederService {
@@ -11,6 +13,8 @@ export class SeederService {
     private readonly logger: Logger,
     private readonly partsService: PartsService,
     private readonly partComponentsService: PartComponentsService,
+    private readonly partAdditionsService: PartAdditionsService,
+    private readonly partSubtractionsService: PartSubtractionsService,
   ) {}
 
   async seed() {
@@ -28,6 +32,14 @@ export class SeederService {
       parent_id: barbedWire.part_id,
       component_id: copperOre.part_id,
       quantity: 2,
+    });
+    await this.partAdditionsService.addAddition({
+      part_id: barbedWire.part_id,
+      quantity: 5,
+    });
+    await this.partSubtractionsService.addSubtraction({
+      part_id: barbedWire.part_id,
+      quantity: 1,
     });
   }
 

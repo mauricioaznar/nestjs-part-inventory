@@ -11,7 +11,7 @@ import { ApolloError } from 'apollo-server-express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { FilesModule } from './modules/files/files.module';
 import { MemoryTokenModule } from './modules/common/services/memory-token/memory-token.module';
-import { PartsModule } from './modules/parts/parts.module';
+import { EntitiesModule } from './modules/entities/entities.module';
 
 @Module({
   imports: [
@@ -57,7 +57,7 @@ import { PartsModule } from './modules/parts/parts.module';
     }),
     CacheModule.register({ ttl: 0, isGlobal: true }),
     AuthModule,
-    PartsModule,
+    EntitiesModule,
     MemoryTokenModule,
     FilesModule,
   ],

@@ -1,7 +1,10 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Injectable } from '@nestjs/common';
 import { PartComponentsService } from './part-components.service';
-import { PartComponent, PartComponentInput } from './part-components.dto';
+import {
+  PartComponent,
+  PartComponentInput,
+} from '../../common/dto/entities/part-components.dto';
 
 @Resolver(() => PartComponent)
 @Injectable()

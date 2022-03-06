@@ -16,47 +16,24 @@ model User {
   password String
 }
 
-model Product {
-  product_id                       Int                             @id @default(autoincrement())
+
+
+model Part {
+  part_id                       Int                             @id @default(autoincrement())
   name                             String                          @db.Text
-  introduction_date                DateTime?
-  sales_discontinuation_date       DateTime?
-  support_discontinuation_date     DateTime?
   comment                          String?                         @db.Text
-  is_good                          Boolean?
-  is_service                       Boolean?
-  product_category_classifications ProductCategoryClassification[]
-  product_feature_applicabilities  ProductFeatureApplicability[]
+  components  PartComponent[] @relation("component")
+  parents  PartComponent[] @relation("parent")
 }
 
-model ProductCategory {
-  product_category_id               Int                             @id @default(autoincrement())
-  description                       String                          @db.Text
-  products_category_classifications ProductCategoryClassification[]
+
+model PartComponent {
+  parent    Part @relation("parent", fields: [parent_id], references: [part_id])
+  parent_id  Int
+  component   Part @relation("component", fields: [component_id], references: [part_id])
+  component_id Int
+  quantity Int
+
+  @@id([parent_id, component_id])
 }
 
-model ProductCategoryClassification {
-  product             Product         @relation(fields: [product_id], references: [product_id])
-  product_id          Int
-  product_category    ProductCategory @relation(fields: [product_category_id], references: [product_category_id])
-  product_category_id Int
-  from_date           DateTime
-
-  @@id([product_id, product_category_id])
-}
-
-model ProductFeature {
-  product_feature_id              Int                           @id @default(autoincrement())
-  description                     String                        @db.Text
-  product_feature_applicabilities ProductFeatureApplicability[]
-}
-
-model ProductFeatureApplicability {
-  product_feature_id Int
-  product_feature    ProductFeature @relation(fields: [product_feature_id], references: [product_feature_id])
-  product_id         Int
-  product            Product        @relation(fields: [product_id], references: [product_id])
-  from_date          DateTime
-
-  @@id([product_id, product_feature_id])
-}

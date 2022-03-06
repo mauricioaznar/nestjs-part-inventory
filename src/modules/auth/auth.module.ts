@@ -10,6 +10,7 @@ import { MemoryTokenModule } from '../common/services/memory-token/memory-token.
 import { FilesModule } from '../files/files.module';
 import { AuthController } from './auth.controller';
 import { PrismaService } from '../common/services/prisma/prisma.service';
+import { UserService } from './user.service';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PrismaService } from '../common/services/prisma/prisma.service';
   controllers: [AuthController],
   providers: [
     AuthService,
+    UserService,
     LocalStrategy,
     JwtStrategy,
     AuthResolver,

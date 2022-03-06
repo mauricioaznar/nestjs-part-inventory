@@ -5,11 +5,13 @@ import { PartsService } from '../entities/parts/parts.service';
 import { PartComponentsService } from '../entities/part-components/part-components.service';
 import { PartAdditionsService } from '../entities/part-additions/part-additions.service';
 import { PartSubtractionsService } from '../entities/part-subtractions/part-subtractions.service';
+import { UserService } from '../auth/user.service';
 
 @Module({
   providers: [
     Logger,
     SeederService,
+    UserService,
     PrismaService,
     PartsService,
     PartComponentsService,

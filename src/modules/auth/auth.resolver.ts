@@ -5,11 +5,15 @@ import { AccessToken, LoginInput, User, UserInput } from './auth.dto';
 import { Injectable, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { UserService } from './user.service';
 
 @Resolver(() => User)
 @Injectable()
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+  ) {}
 
   @Mutation(() => AccessToken)
   async login(@Args('loginInput') input: LoginInput) {
@@ -23,7 +27,7 @@ export class AuthResolver {
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
   async currentUser(@CurrentUser() currentUser: User) {
-    return this.authService.findOneByUsername({
+    return this.userService.findOneByUsername({
       username: currentUser.username,
     });
   }
@@ -36,7 +40,7 @@ export class AuthResolver {
   @Query(() => Boolean)
   @UseGuards(GqlAuthGuard)
   async isUserOccupied(@Args('username') username: string) {
-    const user = await this.authService.findOneByUsername({
+    const user = await this.userService.findOneByUsername({
       username,
     });
     return !!user;
@@ -45,7 +49,7 @@ export class AuthResolver {
   @Mutation(() => User)
   @UseGuards(GqlAuthGuard)
   async createUser(@Args('userInput') input: UserInput) {
-    return this.authService.create(input);
+    return this.userService.create(input);
   }
 
   @Mutation(() => User)
@@ -54,12 +58,12 @@ export class AuthResolver {
     @Args('id') id: number,
     @Args('userInput') input: UserInput,
   ) {
-    return this.authService.update(id, input);
+    return this.userService.update(id, input);
   }
 
   @Query(() => [User])
   @UseGuards(GqlAuthGuard)
   async users() {
-    return this.authService.findAll();
+    return this.userService.findAll();
   }
 }

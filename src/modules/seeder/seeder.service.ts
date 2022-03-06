@@ -5,12 +5,15 @@ import { PartsService } from '../entities/parts/parts.service';
 import { PartComponentsService } from '../entities/part-components/part-components.service';
 import { PartAdditionsService } from '../entities/part-additions/part-additions.service';
 import { PartSubtractionsService } from '../entities/part-subtractions/part-subtractions.service';
+import { AuthService } from '../auth/auth.service';
+import { UserService } from '../auth/user.service';
 
 @Injectable()
 export class SeederService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly logger: Logger,
+    private readonly userService: UserService,
     private readonly partsService: PartsService,
     private readonly partComponentsService: PartComponentsService,
     private readonly partAdditionsService: PartAdditionsService,
@@ -44,12 +47,9 @@ export class SeederService {
   }
 
   async user(): Promise<User> {
-    return this.prisma.user.create({
-      data: {
-        username: 'john',
-        password:
-          '$2b$10$ILmoZIpCOILGmUC0g4emheQpBakyG854wlnooc0hgLIssZuem1q4.',
-      },
+    return this.userService.create({
+      username: 'john',
+      password: 'changemeee',
     });
   }
 }

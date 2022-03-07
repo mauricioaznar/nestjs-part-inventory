@@ -72,5 +72,19 @@ export class PartAssignmentService {
       component_id: rawMaterials.lithium.part_id,
       quantity: 2,
     });
+
+    // silicon rubber
+    await this.partComponentsService.addComponent({
+      parent_id: basicMaterials.siliconeRubber.part_id,
+      component_id: rawMaterials.creepvineSeedCluster.part_id,
+      quantity: 1,
+    });
+
+    // titanium ingot
+    await this.partComponentsService.addComponent({
+      parent_id: basicMaterials.titaniumIngot.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      quantity: 10,
+    });
   }
 }

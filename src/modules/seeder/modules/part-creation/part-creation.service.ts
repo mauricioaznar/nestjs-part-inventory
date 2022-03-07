@@ -4,6 +4,7 @@ import { PartsService } from '../../../entities/parts/parts.service';
 import { RawMaterialsSeed } from '../types/raw-materials-seed';
 import { BasicMaterialsSeed } from '../types/basic-materials-seed';
 import { AllPartsSeed } from '../types/all-parts-seed';
+import { ElectronicSeed } from '../types/electronic-seed';
 
 @Injectable()
 export class PartCreationService {
@@ -16,10 +17,12 @@ export class PartCreationService {
   async createParts(): Promise<AllPartsSeed> {
     const rawMaterials = await this.createRawMaterials();
     const basicMaterials = await this.createBasicMaterials();
+    const electronics = await this.createElectronics();
 
     return {
       rawMaterials,
       basicMaterials,
+      electronics,
     };
   }
 
@@ -217,6 +220,53 @@ export class PartCreationService {
       plasteelIngot,
       siliconeRubber,
       titaniumIngot,
+    };
+  }
+
+  private async createElectronics(): Promise<ElectronicSeed> {
+    const battery = await this.partsService.createPart({
+      name: 'Battery',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/6d/Battery.png',
+    });
+    const computerChip = await this.partsService.createPart({
+      name: 'Computer chip',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/6f/Computer_Chip.png',
+    });
+    const copperWire = await this.partsService.createPart({
+      name: 'Copper wire',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/4/43/Copper_Wire.png',
+    });
+    const ionBattery = await this.partsService.createPart({
+      name: 'Ion battery',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/9d/Ion_Battery.png',
+    });
+    const powerCell = await this.partsService.createPart({
+      name: 'Power cell',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/9a/Power_Cell.png',
+    });
+    const wiringKit = await this.partsService.createPart({
+      name: 'Wiring kit',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/7/7b/Wiring_Kit.png',
+    });
+    const advancedWiringKit = await this.partsService.createPart({
+      name: 'Advanced wiring kit',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/92/Advanced_Wiring_Kit.png',
+    });
+    return {
+      advancedWiringKit,
+      battery,
+      computerChip,
+      copperWire,
+      ionBattery,
+      powerCell,
+      wiringKit,
     };
   }
 }

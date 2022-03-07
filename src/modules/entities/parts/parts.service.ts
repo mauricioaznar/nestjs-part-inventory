@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../common/services/prisma/prisma.service';
 import { Part, PartInput } from '../../common/dto/entities/parts.dto';
-import { PartComponent } from '../../common/dto/entities/part-components.dto';
 
 @Injectable()
 export class PartsService {
@@ -11,6 +10,7 @@ export class PartsService {
     return this.prisma.part.create({
       data: {
         name: partInput.name,
+        image_url: partInput.image_url,
       },
     });
   }
@@ -30,6 +30,7 @@ export class PartsService {
       },
       data: {
         name: partInput.name,
+        image_url: partInput.image_url,
       },
     });
   }

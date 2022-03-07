@@ -20,6 +20,7 @@ model Part {
   part_id    Int             @id @default(autoincrement())
   name       String          @db.Text
   comment    String?         @db.Text
+  image_url String?
   components PartComponent[] @relation("component")
   parents    PartComponent[] @relation("parent")
   additions  PartAddition[]  @relation("additions")

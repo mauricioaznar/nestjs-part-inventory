@@ -12,6 +12,7 @@ CREATE TABLE "Part" (
     "part_id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "comment" TEXT,
+    "image_url" TEXT,
 
     CONSTRAINT "Part_pkey" PRIMARY KEY ("part_id")
 );

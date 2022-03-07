@@ -22,8 +22,21 @@ export class SeederService {
 
   async seed() {
     const user = await this.user();
+    const parts = await this.parts();
+  }
+
+  async user(): Promise<User> {
+    return this.userService.create({
+      username: 'john',
+      password: 'changemeee',
+    });
+  }
+
+  async parts() {
     const titanium = await this.partsService.createPart({
       name: 'Titanium',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/c/cc/Titanium.png',
     });
     const copperOre = await this.partsService.createPart({
       name: 'Copper ore',
@@ -43,13 +56,6 @@ export class SeederService {
     await this.partSubtractionsService.addSubtraction({
       part_id: barbedWire.part_id,
       quantity: 1,
-    });
-  }
-
-  async user(): Promise<User> {
-    return this.userService.create({
-      username: 'john',
-      password: 'changemeee',
     });
   }
 }

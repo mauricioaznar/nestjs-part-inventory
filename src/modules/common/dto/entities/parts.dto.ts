@@ -5,6 +5,9 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 export class PartBase {
   @Field()
   name: string;
+
+  @Field({ nullable: true })
+  image_url?: string;
 }
 
 @InputType('partInput')

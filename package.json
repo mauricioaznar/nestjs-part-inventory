@@ -16,7 +16,7 @@
     "pretest": "env-cmd -f ./.env.test ts-node src/__tests__/factories/setup-database.ts & npm run migration:run:test",
     "test": "env-cmd -f .env.test jest --detectOpenHandles --forceExit",
     "test:watch": "npm run test -- --watch",
-    "seed": "env-cmd -f ./.env ts-node prisma/seed.ts",
+    "seed": "env-cmd -f ./.env ts-node src/modules/seeder/seed.ts",
     "migration:run:test": "env-cmd -f ./.env.test prisma migrate dev",
     "db:create-migrations": "env-cmd -f .env prisma migrate dev --create-only",
     "db:migrate": "env-cmd -f .env prisma migrate dev",
@@ -25,7 +25,7 @@
     "db:format": "env-cmd -f .env prisma format"
   },
   "prisma": {
-    "seed": "env-cmd -f ./.env ts-node prisma/seed.ts"
+    "seed": "env-cmd -f ./.env ts-node src/modules/seeder/seed.ts"
   },
   "author": "",
   "license": "ISC",

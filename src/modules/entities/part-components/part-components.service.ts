@@ -4,7 +4,6 @@ import {
   PartComponent,
   PartComponentInput,
 } from '../../common/dto/entities/part-components.dto';
-import { Part } from '../../common/dto/entities/parts.dto';
 
 @Injectable()
 export class PartComponentsService {

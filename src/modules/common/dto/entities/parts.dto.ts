@@ -8,6 +8,9 @@ export class PartBase {
 
   @Field({ nullable: true })
   image_url?: string;
+
+  @Field({ nullable: false })
+  part_category_id: number;
 }
 
 @InputType('partInput')

@@ -9,6 +9,7 @@ export class PartsService {
   async createPart(partInput: PartInput): Promise<Part> {
     return this.prisma.part.create({
       data: {
+        part_category_id: partInput.part_category_id,
         name: partInput.name,
         image_url: partInput.image_url,
       },

@@ -6,13 +6,39 @@ import { Part } from '../../dto/entities/parts.dto';
 export class PartInventoryService {
   constructor(private prisma: PrismaService) {}
 
-  async getCurrentQuantity(part: Part): Promise<number> {
-    const additionsTotal = await this.getAdditionsTotal(part);
-    const subtractionsTotal = await this.getSubtractionTotal(part);
+  async getCurrentQuantity(partId: number): Promise<number> {
+    const additionsTotal = await this.getAdditionsTotal(partId);
+    const subtractionsTotal = await this.getSubtractionTotal(partId);
     return additionsTotal - subtractionsTotal;
   }
 
-  private async getAdditionsTotal(part: Part): Promise<number> {
+  async craft(partId: number): Promise<void> {
+    const partComponents = await this.prisma.partAssignment.findMany({
+      where: {
+        parent_id: partId,
+      },
+    });
+
+    for (const component of partComponents) {
+      await this.prisma.partSubtraction.create({
+        data: {
+          part_id: component.component_id,
+          quantity: component.quantity,
+        },
+      });
+    }
+
+    await this.prisma.partAddition.create({
+      data: {
+        part_id: partId,
+        quantity: 1,
+      },
+    });
+  }
+
+  async retrieve() {}
+
+  private async getAdditionsTotal(partId: number): Promise<number> {
     const {
       _sum: { quantity },
     } = await this.prisma.partAddition.aggregate({
@@ -20,13 +46,13 @@ export class PartInventoryService {
         quantity: true,
       },
       where: {
-        part_id: part.part_id,
+        part_id: partId,
       },
     });
     return quantity || 0;
   }
 
-  private async getSubtractionTotal(part: Part): Promise<number> {
+  private async getSubtractionTotal(partId: number): Promise<number> {
     const {
       _sum: { quantity },
     } = await this.prisma.partSubtraction.aggregate({
@@ -34,7 +60,7 @@ export class PartInventoryService {
         quantity: true,
       },
       where: {
-        part_id: part.part_id,
+        part_id: partId,
       },
     });
     return quantity || 0;

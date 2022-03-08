@@ -13,8 +13,9 @@ import {
   Part,
   PartInput,
 } from '../../common/dto/entities/parts.dto';
-import { PartComponent } from '../../common/dto/entities/part-components.dto';
 import { PartInventoryService } from '../../common/services/entities/part-inventory.service';
+import { PartAssignmentsService } from '../../common/services/entities/part-assignments.service';
+import { PartAssignmentInput } from '../../common/dto/entities/part-assignment.dto';
 
 @Resolver(() => Part)
 @Injectable()
@@ -22,7 +23,13 @@ export class PartsResolver {
   constructor(
     private partsService: PartsService,
     private partInventoryService: PartInventoryService,
+    private partAssignmentService: PartAssignmentsService,
   ) {}
+
+  @Query(() => [Part])
+  async getParts() {
+    return this.partsService.getProducts();
+  }
 
   @Mutation(() => Part)
   async createPart(@Args('partInput') input: PartInput) {
@@ -43,9 +50,11 @@ export class PartsResolver {
     return this.partsService.updatePart(id, input);
   }
 
-  @Query(() => [Part])
-  async getParts() {
-    return this.partsService.getProducts();
+  @Mutation(() => Component)
+  async assignComponent(
+    @Args('PartAssignmentInput') input: PartAssignmentInput,
+  ): Promise<Component> {
+    return this.partAssignmentService.assignComponent(input);
   }
 
   @ResolveField(() => [Component])

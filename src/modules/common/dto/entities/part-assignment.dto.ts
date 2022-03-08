@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
-export class PartComponentBase {
+export class PartAssignmentBase {
   @Field({ nullable: false })
   parent_id: number;
 
@@ -13,8 +13,8 @@ export class PartComponentBase {
   quantity: number;
 }
 
-@InputType('partComponentInput')
-export class PartComponentInput extends PartComponentBase {}
+@InputType('PartAssignmentInput')
+export class PartAssignmentInput extends PartAssignmentBase {}
 
-@ObjectType('PartComponent')
-export class PartComponent extends PartComponentBase {}
+@ObjectType('PartAssignment')
+export class PartAssignment extends PartAssignmentBase {}

@@ -13,17 +13,26 @@ CREATE TABLE "Part" (
     "name" TEXT NOT NULL,
     "comment" TEXT,
     "image_url" TEXT,
+    "part_category_id" INTEGER NOT NULL,
 
     CONSTRAINT "Part_pkey" PRIMARY KEY ("part_id")
 );
 
 -- CreateTable
-CREATE TABLE "PartComponent" (
+CREATE TABLE "PartCategory" (
+    "part_category_id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "PartCategory_pkey" PRIMARY KEY ("part_category_id")
+);
+
+-- CreateTable
+CREATE TABLE "PartAssignment" (
     "parent_id" INTEGER NOT NULL,
     "component_id" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
 
-    CONSTRAINT "PartComponent_pkey" PRIMARY KEY ("parent_id","component_id")
+    CONSTRAINT "PartAssignment_pkey" PRIMARY KEY ("parent_id","component_id")
 );
 
 -- CreateTable
@@ -45,10 +54,13 @@ CREATE TABLE "PartSubtraction" (
 );
 
 -- AddForeignKey
-ALTER TABLE "PartComponent" ADD CONSTRAINT "PartComponent_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "Part"("part_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Part" ADD CONSTRAINT "Part_part_category_id_fkey" FOREIGN KEY ("part_category_id") REFERENCES "PartCategory"("part_category_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PartComponent" ADD CONSTRAINT "PartComponent_component_id_fkey" FOREIGN KEY ("component_id") REFERENCES "Part"("part_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PartAssignment" ADD CONSTRAINT "PartAssignment_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "Part"("part_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PartAssignment" ADD CONSTRAINT "PartAssignment_component_id_fkey" FOREIGN KEY ("component_id") REFERENCES "Part"("part_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PartAddition" ADD CONSTRAINT "PartAddition_part_id_fkey" FOREIGN KEY ("part_id") REFERENCES "Part"("part_id") ON DELETE RESTRICT ON UPDATE CASCADE;

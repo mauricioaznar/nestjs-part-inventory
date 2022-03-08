@@ -41,7 +41,7 @@ export class PartsService {
   }
 
   async getComponents(part: Part) {
-    return await this.prisma.partComponent.findMany({
+    return await this.prisma.partAssignment.findMany({
       select: {
         component: true,
         quantity: true,

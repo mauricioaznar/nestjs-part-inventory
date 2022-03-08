@@ -1,4 +1,4 @@
-import { PartCategory } from '../../../common/dto/entities/part-categories.dto';
+import { PartCategory } from '../../common/dto/entities/part-categories.dto';
 
 export interface PartCategoriesSeed {
   basicMaterials: PartCategory;

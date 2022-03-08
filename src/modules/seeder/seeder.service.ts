@@ -3,7 +3,7 @@ import { PrismaService } from '../common/services/prisma/prisma.service';
 import { User } from '../auth/auth.dto';
 import { UserService } from '../auth/user.service';
 import { PartCreationService } from './modules/part-creation/part-creation.service';
-import { PartAssignmentService } from './modules/part-assignment/part-assignment.service';
+import { PartAssignmentCreationService } from './modules/part-assignment-creation/part-assignment-creation.service';
 import { PartCategoryCreationService } from './modules/part-category-creation/part-category-creation.service';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class SeederService {
     private readonly logger: Logger,
     private readonly userService: UserService,
     private readonly partCreationService: PartCreationService,
-    private readonly partAssignmentService: PartAssignmentService,
+    private readonly partAssignmentService: PartAssignmentCreationService,
     private readonly partCategoryCreationService: PartCategoryCreationService,
   ) {}
 

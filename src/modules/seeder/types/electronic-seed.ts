@@ -1,4 +1,4 @@
-import { Part } from '../../../common/dto/entities/parts.dto';
+import { Part } from '../../common/dto/entities/parts.dto';
 
 export interface ElectronicSeed {
   battery: Part;

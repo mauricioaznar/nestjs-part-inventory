@@ -36,7 +36,9 @@ export class PartInventoryService {
     });
   }
 
-  async retrieve() {}
+  async add() {
+    //
+  }
 
   private async getAdditionsTotal(partId: number): Promise<number> {
     const {

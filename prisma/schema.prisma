@@ -17,16 +17,16 @@ model User {
 }
 
 model Part {
-  part_id          Int               @id @default(autoincrement())
-  name             String            @db.Text
-  comment          String?           @db.Text
-  image_url        String?
-  part_category_id Int
-  part_categories  PartCategory      @relation("categories", fields: [part_category_id], references: [part_category_id])
-  components       PartAssignment[]  @relation("component")
-  parents          PartAssignment[]  @relation("parent")
-  additions        PartAddition[]    @relation("additions")
-  subtractions     PartSubtraction[] @relation("subtractions")
+  part_id               Int               @id @default(autoincrement())
+  name                  String            @db.Text
+  comment               String?           @db.Text
+  image_url             String?
+  part_category_id      Int
+  part_categories       PartCategory      @relation("categories", fields: [part_category_id], references: [part_category_id])
+  parent_assignments    PartAssignment[]  @relation("parent_assignments")
+  component_assignments PartAssignment[]  @relation("component_assignments")
+  additions             PartAddition[]    @relation("additions")
+  subtractions          PartSubtraction[] @relation("subtractions")
 }
 
 model PartCategory {
@@ -36,9 +36,9 @@ model PartCategory {
 }
 
 model PartAssignment {
-  parent       Part @relation("parent", fields: [parent_id], references: [part_id])
+  parent       Part @relation("parent_assignments", fields: [parent_id], references: [part_id])
   parent_id    Int
-  component    Part @relation("component", fields: [component_id], references: [part_id])
+  component    Part @relation("component_assignments", fields: [component_id], references: [part_id])
   component_id Int
   quantity     Int
 

@@ -58,12 +58,14 @@ export class PartInventoryService {
       throw new BadRequestException('Part not found');
     }
 
+    // is part_id matched to parent_id?
+
     const part = await this.prisma.part.findFirst({
       select: {
         name: true,
-        _count: {
-          select: {
-            components: true,
+        components: {
+          where: {
+            parent_id: partId,
           },
         },
       },
@@ -72,16 +74,18 @@ export class PartInventoryService {
       },
     });
 
-    if (part._count.components !== 0) {
-      throw new BadRequestException('Part cannot be added, it must be crafted');
-    }
+    console.log(part);
 
-    await this.prisma.partAddition.create({
-      data: {
-        part_id: partId,
-        quantity: 1,
-      },
-    });
+    // if (part._count.components !== 0) {
+    //   throw new BadRequestException('Part cannot be added, it must be crafted');
+    // }
+
+    // await this.prisma.partAddition.create({
+    //   data: {
+    //     part_id: partId,
+    //     quantity: 1,
+    //   },
+    // });
   }
 
   private async doesPartExist(partId: number): Promise<boolean> {

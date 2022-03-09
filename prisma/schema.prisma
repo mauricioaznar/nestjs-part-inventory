@@ -23,8 +23,8 @@ model Part {
   image_url        String?
   part_category_id Int
   part_categories  PartCategory      @relation("categories", fields: [part_category_id], references: [part_category_id])
-  components       PartAssignment[]  @relation("parent")
-  parents          PartAssignment[]  @relation("component")
+  components       PartAssignment[]  @relation("component")
+  parents          PartAssignment[]  @relation("parent")
   additions        PartAddition[]    @relation("additions")
   subtractions     PartSubtraction[] @relation("subtractions")
 }

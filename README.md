@@ -7,3 +7,4 @@
 ### Currently implementing
 
 * udnerstand the many to many relationship model 
+* why does react render a component twice?

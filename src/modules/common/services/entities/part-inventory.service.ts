@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Part } from '../../dto/entities/parts.dto';
 
@@ -20,6 +20,14 @@ export class PartInventoryService {
     });
 
     for (const component of partComponents) {
+      const componentCurrentQuantity = await this.getCurrentQuantity(
+        component.component_id,
+      );
+
+      if (componentCurrentQuantity < component.quantity) {
+        throw new BadRequestException('Not enough component parts to craft');
+      }
+
       await this.prisma.partSubtraction.create({
         data: {
           part_id: component.component_id,
@@ -36,8 +44,31 @@ export class PartInventoryService {
     });
   }
 
-  async add() {
-    //
+  async add(partId: number): Promise<void> {
+    const part = await this.prisma.part.findFirst({
+      select: {
+        name: true,
+        _count: {
+          select: {
+            components: true,
+          },
+        },
+      },
+      where: {
+        part_id: partId,
+      },
+    });
+
+    if (part._count.components !== 0) {
+      throw new BadRequestException('Part cannot be added, it must be crafted');
+    }
+
+    await this.prisma.partAddition.create({
+      data: {
+        part_id: partId,
+        quantity: 1,
+      },
+    });
   }
 
   private async getAdditionsTotal(partId: number): Promise<number> {

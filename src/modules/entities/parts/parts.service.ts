@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/services/prisma/prisma.service';
 import { Part, PartInput } from '../../common/dto/entities/parts.dto';
 
@@ -25,6 +25,12 @@ export class PartsService {
   }
 
   async updatePart(id: number, partInput: PartInput): Promise<Part> {
+    const part = await this.getPart(id);
+
+    if (!part) {
+      throw new NotFoundException(`part with id '${id}' not found`);
+    }
+
     return this.prisma.part.update({
       where: {
         part_id: id,

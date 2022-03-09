@@ -38,16 +38,22 @@ export class PartsResolver {
 
   @Mutation(() => Part)
   async updatePart(
-    @Args('id') id: number,
+    @Args('partId') partId: number,
     @Args('partInput') input: PartInput,
   ) {
-    const part = await this.partsService.getPart(id);
+    return this.partsService.updatePart(partId, input);
+  }
 
-    if (!part) {
-      throw new NotFoundException(`part with id '${id}' not found`);
-    }
+  @Mutation(() => Boolean)
+  async craft(@Args('partId') id: number) {
+    await this.partInventoryService.craft(id);
+    return true;
+  }
 
-    return this.partsService.updatePart(id, input);
+  @Mutation(() => Boolean)
+  async add(@Args('partId') partId: number) {
+    await this.partInventoryService.add(partId);
+    return true;
   }
 
   @Mutation(() => Component)

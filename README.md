@@ -6,3 +6,4 @@
 
 ### Currently implementing
 
+* udnerstand the many to many relationship model 

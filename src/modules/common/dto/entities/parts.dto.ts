@@ -28,5 +28,5 @@ export class Component {
   component: Part;
 
   @Field({ nullable: false })
-  quantity: number;
+  required_quantity: number;
 }

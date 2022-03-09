@@ -10,7 +10,7 @@ export class PartAssignmentBase {
   component_id: number;
 
   @Field({ nullable: false })
-  quantity: number;
+  required_quantity: number;
 }
 
 @InputType('PartAssignmentInput')

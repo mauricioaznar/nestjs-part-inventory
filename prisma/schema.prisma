@@ -40,7 +40,7 @@ model PartAssignment {
   parent_id    Int
   component    Part @relation("component_assignments", fields: [component_id], references: [part_id])
   component_id Int
-  quantity     Int
+  required_quantity     Int
 
   @@id([parent_id, component_id])
 }

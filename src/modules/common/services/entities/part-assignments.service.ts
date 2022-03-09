@@ -16,12 +16,12 @@ export class PartAssignmentsService {
     return this.prisma.partAssignment.create({
       select: {
         component: true,
-        quantity: true,
+        required_quantity: true,
       },
       data: {
         parent_id: partAssignmentInput.parent_id,
         component_id: partAssignmentInput.component_id,
-        quantity: partAssignmentInput.quantity,
+        required_quantity: partAssignmentInput.required_quantity,
       },
     });
   }

@@ -33,14 +33,14 @@ export class PartInventoryService {
         component.component_id,
       );
 
-      if (componentCurrentQuantity < component.quantity) {
+      if (componentCurrentQuantity < component.required_quantity) {
         throw new BadRequestException('Not enough component parts to craft');
       }
 
       await this.prisma.partSubtraction.create({
         data: {
           part_id: component.component_id,
-          quantity: component.quantity,
+          quantity: component.required_quantity,
         },
       });
     }

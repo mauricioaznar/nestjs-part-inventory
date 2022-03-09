@@ -50,7 +50,7 @@ export class PartsService {
     return await this.prisma.partAssignment.findMany({
       select: {
         component: true,
-        quantity: true,
+        required_quantity: true,
       },
       where: {
         parent_id: part.part_id,

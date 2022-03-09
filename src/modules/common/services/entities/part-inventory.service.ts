@@ -12,11 +12,21 @@ export class PartInventoryService {
   }
 
   async craft(partId: number): Promise<void> {
+    const doesPartExist = await this.doesPartExist(partId);
+
+    if (!doesPartExist) {
+      throw new BadRequestException('Part not found');
+    }
+
     const partComponents = await this.prisma.partAssignment.findMany({
       where: {
         parent_id: partId,
       },
     });
+
+    if (partComponents.length === 0) {
+      throw new BadRequestException('Part cannot be crafted');
+    }
 
     for (const component of partComponents) {
       const componentCurrentQuantity = await this.getCurrentQuantity(
@@ -44,6 +54,10 @@ export class PartInventoryService {
   }
 
   async add(partId: number): Promise<void> {
+    if (!(await this.doesPartExist(partId))) {
+      throw new BadRequestException('Part not found');
+    }
+
     const part = await this.prisma.part.findFirst({
       select: {
         name: true,
@@ -68,6 +82,10 @@ export class PartInventoryService {
         quantity: 1,
       },
     });
+  }
+
+  private async doesPartExist(partId: number): Promise<boolean> {
+    return !!(await this.prisma.part.findFirst({ where: { part_id: partId } }));
   }
 
   private async getAdditionsTotal(partId: number): Promise<number> {

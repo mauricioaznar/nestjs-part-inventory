@@ -2,17 +2,20 @@ import { INestApplication } from '@nestjs/common';
 import { setupApp } from '../../common/__tests__/helpers/setup-app';
 import { PartCategoriesService } from '../part-categories/part-categories.service';
 import { PartsService } from './parts.service';
+import { PartAssignmentsService } from '../../common/services/entities/part-assignments.service';
 
 describe('part service', () => {
   let app: INestApplication;
   let partCategoriesService: PartCategoriesService;
   let partsService: PartsService;
+  let partAssignmentsService: PartAssignmentsService;
   let partCategory;
 
   beforeAll(async () => {
     app = await setupApp();
     partCategoriesService = app.get(PartCategoriesService);
     partsService = app.get(PartsService);
+    partAssignmentsService = app.get(PartAssignmentsService);
     partCategory = await partCategoriesService.addCategory({
       name: 'part category created in part test',
     });
@@ -101,6 +104,59 @@ describe('part service', () => {
         }),
         expect.objectContaining({
           name: expect.stringMatching(partName2),
+        }),
+      ]),
+    );
+  });
+
+  it('get part components', async () => {
+    const partComponent1 = await partsService.createPart({
+      name: 'get part components name 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partComponent2 = await partsService.createPart({
+      name: 'get part components name 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partParent = await partsService.createPart({
+      name: 'get part components parent name 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partComponent1RequiredQuantity = 1;
+    await partAssignmentsService.assignComponent({
+      required_quantity: 1,
+      parent_id: partParent.part_id,
+      component_id: partComponent1.part_id,
+    });
+
+    const partComponent2RequiredQuantity = 3;
+    await partAssignmentsService.assignComponent({
+      required_quantity: partComponent2RequiredQuantity,
+      parent_id: partParent.part_id,
+      component_id: partComponent2.part_id,
+    });
+
+    const components = await partsService.getComponents(partParent);
+
+    expect(components).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          component: expect.objectContaining({
+            name: expect.stringMatching(partComponent1.name),
+          }),
+          required_quantity: partComponent1RequiredQuantity,
+        }),
+        expect.objectContaining({
+          component: expect.objectContaining({
+            name: expect.stringMatching(partComponent2.name),
+          }),
+          required_quantity: partComponent2RequiredQuantity,
         }),
       ]),
     );

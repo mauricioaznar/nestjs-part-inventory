@@ -32,7 +32,7 @@ export class SeederService {
   async user(): Promise<User> {
     return this.userService.create({
       username: 'john',
-      password: 'sistema90demo',
+      password: 'changeme',
     });
   }
 }

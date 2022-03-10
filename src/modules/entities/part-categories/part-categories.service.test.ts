@@ -8,13 +8,13 @@ describe('part category', () => {
   let partCategoriesService: PartCategoriesService;
   let partsService: PartsService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await setupApp();
     partCategoriesService = app.get(PartCategoriesService);
     partsService = app.get(PartsService);
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await app.close();
   });
 

@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AccessToken, LoginInput, User } from './auth.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../common/services/prisma/prisma.service';
+import { AuthenticationError } from 'apollo-server-core';
 
 interface UserWithPassword extends User {
   password: string;
@@ -33,13 +34,14 @@ export class AuthService {
 
   async login(userInput: LoginInput): Promise<AccessToken> {
     const res = await this.validateUser(userInput.username, userInput.password);
-    if (res) {
-      const { password, ...rest } = res;
-      return {
-        accessToken: this.jwtService.sign({ ...rest }),
-      };
-    } else {
-      return null;
+    if (!res) {
+      throw new BadRequestException(
+        'Could not log-in with the provided credentials',
+      );
     }
+    const { password, ...rest } = res;
+    return {
+      accessToken: this.jwtService.sign({ ...rest }),
+    };
   }
 }

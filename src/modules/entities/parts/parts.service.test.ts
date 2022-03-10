@@ -27,32 +27,47 @@ describe('part service', () => {
   });
 
   it('creates part', async () => {
+    const createdPartName = 'created part 2';
     const part = await partsService.createPart({
-      name: 'Part 1',
+      name: createdPartName,
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
 
-    expect(part.name).toBe('Part 1');
+    expect(part.name).toBe(createdPartName);
+  });
+
+  it('gets part', async () => {
+    const getPartName = 'Part 1';
+    const part = await partsService.createPart({
+      name: getPartName,
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const getPart = await partsService.getPart(part.part_id);
+
+    expect(getPart.name).toBe(getPartName);
   });
 
   it('updates part name', async () => {
     const part = await partsService.createPart({
-      name: 'Part 2',
+      name: 'updated part 3',
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
 
+    const updatedName = 'updated part zxc 1';
     const updatedPart = await partsService.updatePart(part.part_id, {
-      name: 'Part 2 baby',
+      name: updatedName,
       part_category_id: part.part_category_id,
     });
 
-    expect(updatedPart.name).toBe('Part 2 baby');
+    expect(updatedPart.name).toBe(updatedName);
   });
 
   it('fails when part doesnt exist', async () => {
-    const veryBigId = 1000000;
+    const veryBigId = 100000000;
 
     await expect(async () => {
       await partsService.updatePart(veryBigId, {
@@ -60,5 +75,34 @@ describe('part service', () => {
         part_category_id: partCategory.part_category_id,
       });
     }).rejects.toThrow(/not found/i);
+  });
+
+  it('get parts', async () => {
+    const partName1 = 'get parts name 1';
+    await partsService.createPart({
+      name: partName1,
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partName2 = 'get parts name 2';
+    await partsService.createPart({
+      name: partName2,
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const parts = await partsService.getParts();
+
+    expect(parts).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: expect.stringMatching(partName1),
+        }),
+        expect.objectContaining({
+          name: expect.stringMatching(partName2),
+        }),
+      ]),
+    );
   });
 });

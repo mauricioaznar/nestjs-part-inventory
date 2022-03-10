@@ -6,7 +6,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import {
   Component,
@@ -28,7 +28,7 @@ export class PartsResolver {
 
   @Query(() => [Part])
   async getParts() {
-    return this.partsService.getProducts();
+    return this.partsService.getParts();
   }
 
   @Mutation(() => Part)

@@ -10,6 +10,7 @@
     "start": "env-cmd -f .env nest start",
     "dev": "env-cmd -f .env nest start --watch",
     "test": "env-cmd -f .env.test jest --watch",
+    "test:coverage": "env-cmd -f .env.test jest --coverage",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "reset": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "pretest": "env-cmd -f ./.env.test prisma migrate dev",

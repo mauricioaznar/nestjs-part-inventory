@@ -42,7 +42,7 @@ export class PartsService {
     });
   }
 
-  async getProducts(): Promise<Part[]> {
+  async getParts(): Promise<Part[]> {
     return this.prisma.part.findMany();
   }
 

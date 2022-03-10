@@ -10,6 +10,10 @@ describe('Users', () => {
     app = await setupApp();
   });
 
+  afterEach(async () => {
+    await app.close();
+  });
+
   it('user logs in', async () => {
     const username = adminUser.username;
     const password = adminUser.password;

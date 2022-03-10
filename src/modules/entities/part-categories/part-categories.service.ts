@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../common/services/prisma/prisma.service';
 import {
   PartCategory,
@@ -13,6 +13,16 @@ export class PartCategoriesService {
   async addCategory(
     partCategoryInput: PartCategoryInput,
   ): Promise<PartCategory> {
+    const doesCategoryExistWithName = await this.prisma.partCategory.findFirst({
+      where: {
+        name: partCategoryInput.name,
+      },
+    });
+
+    if (doesCategoryExistWithName) {
+      throw new BadRequestException('Category already exists');
+    }
+
     return this.prisma.partCategory.create({
       data: {
         name: partCategoryInput.name,

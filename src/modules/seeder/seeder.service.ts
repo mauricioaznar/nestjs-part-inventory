@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../common/services/prisma/prisma.service';
-import { User } from '../auth/auth.dto';
+import { User } from '../common/dto/entities/auth.dto';
 import { UserService } from '../auth/user.service';
 import { PartCreationService } from './modules/part-creation/part-creation.service';
 import { PartAssignmentCreationService } from './modules/part-assignment-creation/part-assignment-creation.service';
 import { PartCategoryCreationService } from './modules/part-category-creation/part-category-creation.service';
+import { adminUser } from '../common/__tests__/objects/users';
 
 @Injectable()
 export class SeederService {
@@ -31,8 +32,8 @@ export class SeederService {
 
   async user(): Promise<User> {
     return this.userService.create({
-      username: 'john',
-      password: 'changeme',
+      username: adminUser.username,
+      password: adminUser.password,
     });
   }
 }

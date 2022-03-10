@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-s-todo",
+  "name": "nestjs-subnautica",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,24 +8,19 @@
     "build": "nest build",
     "pretty": "prettier --write \"src/**/*.ts\"",
     "start": "env-cmd -f .env nest start",
-    "start:docker": "env-cmd -f ./.env.docker nest start",
     "dev": "env-cmd -f .env nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "env-cmd -f .env node dist/main",
+    "test": "env-cmd -f .env.test jest --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "pretest": "env-cmd -f ./.env.test ts-node src/__tests__/factories/setup-database.ts & npm run migration:run:test",
-    "test": "env-cmd -f .env.test jest --detectOpenHandles --forceExit",
-    "test:watch": "npm run test -- --watch",
-    "seed": "env-cmd -f ./.env ts-node src/modules/seeder/seed.ts",
-    "migration:run:test": "env-cmd -f ./.env.test prisma migrate dev",
+    "reset": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "pretest": "env-cmd -f ./.env.test ts-node src/modules/common/__tests__/helpers/setup-database.ts && npm run db:test",
+    "db:test": "env-cmd -f ./.env.test prisma migrate dev && env-cmd -f ./.env.test prisma migrate reset --force",
     "db:create-migrations": "env-cmd -f .env prisma migrate dev --create-only",
     "db:migrate": "env-cmd -f .env prisma migrate dev",
-    "db:reset": "env-cmd -f .env prisma migrate reset",
-    "db:generate": "env-cmd -f .env prisma generate",
-    "db:format": "env-cmd -f .env prisma format"
+    "db:format": "env-cmd -f ./.env prisma format",
+    "db:reset": "env-cmd -f ./env prisma reset"
   },
   "prisma": {
-    "seed": "env-cmd -f ./.env ts-node src/modules/seeder/seed.ts"
+    "seed": "ts-node src/modules/seeder/seed.ts"
   },
   "author": "",
   "license": "ISC",

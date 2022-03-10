@@ -1,7 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { AuthenticationError } from 'apollo-server-core';
-import { AccessToken, LoginInput, User, UserInput } from './auth.dto';
+import {
+  AccessToken,
+  LoginInput,
+  User,
+  UserInput,
+} from '../common/dto/entities/auth.dto';
 import { Injectable, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';

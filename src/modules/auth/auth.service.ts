@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { AccessToken, LoginInput, User } from './auth.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../common/services/prisma/prisma.service';
-import { AuthenticationError } from 'apollo-server-core';
 
 interface UserWithPassword extends User {
   password: string;

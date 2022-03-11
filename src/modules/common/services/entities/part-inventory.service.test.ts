@@ -151,6 +151,14 @@ describe('part inventory', () => {
     expect(newCurrentQuantity).toBe(2);
   });
 
+  it('fails to craft when part is not found', async () => {
+    const veryLargeNonexistentId = 1002303000;
+
+    await expect(async () => {
+      await partInventoryService.craft(veryLargeNonexistentId);
+    }).rejects.toThrow(/part not found/i);
+  });
+
   it('fails to craft when a part is without component(s)', async () => {
     const { part } = await createsPartWithoutComponents({
       uniqueName: 'part inventory 2',
@@ -161,11 +169,82 @@ describe('part inventory', () => {
     }).rejects.toThrow(/cannot be crafted/i);
   });
 
-  it('fails to craft when part is not found', async () => {
-    const veryLargeNonexistentId = 1002303000;
+  it('fails to craft when a part doesnt have enough component', async () => {
+    const { parent, component } = await createsParentWithOneComponent({
+      uniqueName: 'part inventory 3',
+      requiredComponentQuantity: 2,
+    });
 
     await expect(async () => {
-      await partInventoryService.craft(veryLargeNonexistentId);
-    }).rejects.toThrow(/part not found/i);
+      await partInventoryService.craft(parent.part_id);
+    }).rejects.toThrow(/not enough/i);
+
+    await partInventoryService.add(component.part_id);
+
+    const currentComponentQuantity =
+      await partInventoryService.getCurrentQuantity(component.part_id);
+
+    expect(currentComponentQuantity).toBe(1);
+
+    await expect(async () => {
+      await partInventoryService.craft(parent.part_id);
+    }).rejects.toThrow(/not enough/i);
+  });
+
+  it('crafts a part has enough components', async () => {
+    const { parent, component } = await createsParentWithOneComponent({
+      uniqueName: 'part inventory 4',
+      requiredComponentQuantity: 2,
+    });
+
+    await expect(async () => {
+      await partInventoryService.craft(parent.part_id);
+    }).rejects.toThrow(/not enough/i);
+
+    await partInventoryService.add(component.part_id);
+    await partInventoryService.add(component.part_id);
+
+    const currentComponentQuantity =
+      await partInventoryService.getCurrentQuantity(component.part_id);
+
+    expect(currentComponentQuantity).toBe(2);
+
+    await expect(
+      partInventoryService.craft(parent.part_id),
+    ).resolves.not.toThrow();
+  });
+
+  it('crafts, reduces component quantity once crafted and adds to 1 to parent part', async () => {
+    const { parent, component } = await createsParentWithOneComponent({
+      uniqueName: 'part inventory 5',
+      requiredComponentQuantity: 2,
+    });
+
+    await expect(async () => {
+      await partInventoryService.craft(parent.part_id);
+    }).rejects.toThrow(/not enough/i);
+
+    await partInventoryService.add(component.part_id);
+    await partInventoryService.add(component.part_id);
+
+    const currentComponentQuantity =
+      await partInventoryService.getCurrentQuantity(component.part_id);
+
+    expect(currentComponentQuantity).toBe(2);
+
+    await expect(
+      partInventoryService.craft(parent.part_id),
+    ).resolves.not.toThrow();
+
+    const newCurrentComponentQuantity =
+      await partInventoryService.getCurrentQuantity(component.part_id);
+
+    expect(newCurrentComponentQuantity).toBe(0);
+
+    const currentParentQuantity = await partInventoryService.getCurrentQuantity(
+      parent.part_id,
+    );
+
+    expect(currentParentQuantity).toBe(1);
   });
 });

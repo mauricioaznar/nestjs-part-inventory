@@ -1,7 +1,7 @@
-import { setupApp } from './helpers/setup-app';
 import { PrismaService } from '../services/prisma/prisma.service';
 import { adminUser } from './objects/users';
 import { UserService } from '../../auth/user.service';
+import { setupApp } from './helpers/setup-app';
 
 export default async function setupDatabase() {
   const app = await setupApp();

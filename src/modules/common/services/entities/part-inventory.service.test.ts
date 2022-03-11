@@ -122,6 +122,14 @@ describe('part inventory', () => {
     }).rejects.toThrow(/cannot be added, it must be crafted/i);
   });
 
+  it('fails to add when part doesnt exist', async () => {
+    const veryLargeNonexistentId = 1003003000;
+
+    await expect(async () => {
+      await partInventoryService.add(veryLargeNonexistentId);
+    }).rejects.toThrow(/part not found/i);
+  });
+
   it('adds when part doesnt have a component', async () => {
     const { part } = await createsPartWithoutComponents({
       uniqueName: 'part inventory 2',
@@ -141,5 +149,23 @@ describe('part inventory', () => {
     );
 
     expect(newCurrentQuantity).toBe(2);
+  });
+
+  it('fails to craft when a part is without component(s)', async () => {
+    const { part } = await createsPartWithoutComponents({
+      uniqueName: 'part inventory 2',
+    });
+
+    await expect(async () => {
+      await partInventoryService.craft(part.part_id);
+    }).rejects.toThrow(/cannot be crafted/i);
+  });
+
+  it('fails to craft when part is not found', async () => {
+    const veryLargeNonexistentId = 1002303000;
+
+    await expect(async () => {
+      await partInventoryService.craft(veryLargeNonexistentId);
+    }).rejects.toThrow(/part not found/i);
   });
 });

@@ -51,7 +51,7 @@ export class PartsResolver {
   }
 
   @Mutation(() => Boolean)
-  async add(@Args('partId') partId: number) {
+  async farm(@Args('partId') partId: number) {
     await this.partInventoryService.add(partId);
     return true;
   }

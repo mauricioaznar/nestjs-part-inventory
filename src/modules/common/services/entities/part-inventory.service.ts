@@ -29,6 +29,10 @@ export class PartInventoryService {
       throw new BadRequestException('Part cannot be crafted');
     }
 
+    if (craftInput.quantity < 1) {
+      throw new BadRequestException('Quantity must be bigger than 0');
+    }
+
     for (const component of partComponents) {
       const componentCurrentQuantity = await this.getCurrentQuantity(
         component.component_id,
@@ -84,6 +88,10 @@ export class PartInventoryService {
 
     if (part._count.parent_assignments !== 0) {
       throw new BadRequestException('Part cannot be added, it must be crafted');
+    }
+
+    if (farmInput.quantity < 1) {
+      throw new BadRequestException('Quantity must be bigger than 0');
     }
 
     await this.prisma.partAddition.create({

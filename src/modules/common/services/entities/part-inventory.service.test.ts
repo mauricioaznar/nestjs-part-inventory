@@ -51,14 +51,17 @@ describe('part inventory', () => {
   async function createsParentWithOneComponent({
     uniqueName,
     requiredComponentQuantity,
+    defaultGeneratedQuantity = 1,
   }: {
     uniqueName: string;
     requiredComponentQuantity: number;
+    defaultGeneratedQuantity?: number;
   }): Promise<{ parent: Part; component: Part }> {
     const partParent = await partsService.createPart({
       name: `part parent in ${uniqueName}`,
       image_url: null,
       part_category_id: partCategory.part_category_id,
+      default_generated_quantity: defaultGeneratedQuantity,
     });
 
     const partComponent = await partsService.createPart({
@@ -285,5 +288,42 @@ describe('part inventory', () => {
     );
 
     expect(currentParentQuantity).toBe(1);
+  });
+
+  it('fails to craft or add when quantity is 0 or less', async () => {
+    const { parent, component } = await createsParentWithOneComponent({
+      uniqueName: 'fails when quantity is 0 name',
+      requiredComponentQuantity: 2,
+    });
+
+    await expect(async () => {
+      await partInventoryService.add({
+        part_id: component.part_id,
+        quantity: 0,
+      });
+    }).rejects.toThrow(/quantity must be bigger than 0/i);
+
+    let currentComponentQuantity =
+      await partInventoryService.getCurrentQuantity(component.part_id);
+
+    expect(currentComponentQuantity).toBe(0);
+
+    await partInventoryService.add({
+      part_id: component.part_id,
+      quantity: 2,
+    });
+
+    currentComponentQuantity = await partInventoryService.getCurrentQuantity(
+      component.part_id,
+    );
+
+    expect(currentComponentQuantity).toBe(2);
+
+    await expect(async () => {
+      await partInventoryService.craft({
+        part_id: parent.part_id,
+        quantity: -1,
+      });
+    }).rejects.toThrow(/quantity must be bigger than 0/i);
   });
 });

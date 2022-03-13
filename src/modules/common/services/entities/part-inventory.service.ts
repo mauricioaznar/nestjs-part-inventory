@@ -34,7 +34,10 @@ export class PartInventoryService {
         component.component_id,
       );
 
-      if (componentCurrentQuantity < component.required_quantity) {
+      if (
+        componentCurrentQuantity <
+        component.required_quantity * craftInput.quantity
+      ) {
         throw new BadRequestException('Not enough component parts to craft');
       }
 
@@ -46,10 +49,16 @@ export class PartInventoryService {
       });
     }
 
+    const parent = await this.prisma.part.findFirst({
+      where: {
+        part_id: craftInput.part_id,
+      },
+    });
+
     await this.prisma.partAddition.create({
       data: {
         part_id: craftInput.part_id,
-        quantity: 1,
+        quantity: craftInput.quantity * parent.default_generated_quantity,
       },
     });
   }

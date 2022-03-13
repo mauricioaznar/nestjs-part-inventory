@@ -229,18 +229,18 @@ describe('part inventory', () => {
 
     await partInventoryService.add({
       part_id: component.part_id,
-      quantity: 2,
+      quantity: 4,
     });
 
     const currentComponentQuantity =
       await partInventoryService.getCurrentQuantity(component.part_id);
 
-    expect(currentComponentQuantity).toBe(2);
+    expect(currentComponentQuantity).toBe(4);
 
     await expect(
       partInventoryService.craft({
         part_id: parent.part_id,
-        quantity: 1,
+        quantity: 2,
       }),
     ).resolves.not.toThrow();
   });

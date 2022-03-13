@@ -16,6 +16,10 @@ import {
 import { PartInventoryService } from '../../common/services/entities/part-inventory.service';
 import { PartAssignmentsService } from '../../common/services/entities/part-assignments.service';
 import { PartAssignmentInput } from '../../common/dto/entities/part-assignment.dto';
+import {
+  CraftInput,
+  FarmInput,
+} from '../../common/dto/entities/part-inventory.dto';
 
 @Resolver(() => Part)
 @Injectable()
@@ -45,14 +49,14 @@ export class PartsResolver {
   }
 
   @Mutation(() => Boolean)
-  async craft(@Args('partId') id: number) {
-    await this.partInventoryService.craft(id);
+  async craft(@Args('CraftInput') craftInput: CraftInput) {
+    await this.partInventoryService.craft(craftInput);
     return true;
   }
 
   @Mutation(() => Boolean)
-  async farm(@Args('partId') partId: number) {
-    await this.partInventoryService.add(partId);
+  async farm(@Args('FarmInput') farmInput: FarmInput) {
+    await this.partInventoryService.add(farmInput);
     return true;
   }
 

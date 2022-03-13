@@ -1,4 +1,4 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType({ isAbstract: true })
 @InputType({ isAbstract: true })
@@ -11,6 +11,9 @@ export class PartBase {
 
   @Field({ nullable: false })
   part_category_id: number;
+
+  @Field(() => Int, { nullable: false })
+  default_generated_quantity?: number;
 }
 
 @InputType('partInput')

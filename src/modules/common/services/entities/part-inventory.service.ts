@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { CraftInput, FarmInput } from '../../dto/entities/part-inventory.dto';
 
 @Injectable()
 export class PartInventoryService {
@@ -11,8 +12,8 @@ export class PartInventoryService {
     return additionsTotal - subtractionsTotal;
   }
 
-  async craft(partId: number): Promise<void> {
-    const doesPartExist = await this.doesPartExist(partId);
+  async craft(craftInput: CraftInput): Promise<void> {
+    const doesPartExist = await this.doesPartExist(craftInput.part_id);
 
     if (!doesPartExist) {
       throw new BadRequestException('Part not found');
@@ -20,7 +21,7 @@ export class PartInventoryService {
 
     const partComponents = await this.prisma.partAssignment.findMany({
       where: {
-        parent_id: partId,
+        parent_id: craftInput.part_id,
       },
     });
 
@@ -47,14 +48,14 @@ export class PartInventoryService {
 
     await this.prisma.partAddition.create({
       data: {
-        part_id: partId,
+        part_id: craftInput.part_id,
         quantity: 1,
       },
     });
   }
 
-  async add(partId: number): Promise<void> {
-    if (!(await this.doesPartExist(partId))) {
+  async add(farmInput: FarmInput): Promise<void> {
+    if (!(await this.doesPartExist(farmInput.part_id))) {
       throw new BadRequestException('Part not found');
     }
 
@@ -68,7 +69,7 @@ export class PartInventoryService {
         },
       },
       where: {
-        part_id: partId,
+        part_id: farmInput.part_id,
       },
     });
 
@@ -78,8 +79,8 @@ export class PartInventoryService {
 
     await this.prisma.partAddition.create({
       data: {
-        part_id: partId,
-        quantity: 1,
+        part_id: farmInput.part_id,
+        quantity: farmInput.quantity,
       },
     });
   }

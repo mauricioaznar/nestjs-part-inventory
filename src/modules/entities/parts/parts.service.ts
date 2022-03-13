@@ -12,6 +12,7 @@ export class PartsService {
         part_category_id: partInput.part_category_id,
         name: partInput.name,
         image_url: partInput.image_url,
+        default_generated_quantity: partInput.default_generated_quantity,
       },
     });
   }

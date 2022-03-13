@@ -40,6 +40,29 @@ describe('part service', () => {
     expect(part.name).toBe(createdPartName);
   });
 
+  it('creates part with default generated quantity to 1 without specifying', async () => {
+    const createdPartName = 'created part 3';
+    const part = await partsService.createPart({
+      name: createdPartName,
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    expect(part.default_generated_quantity).toBe(1);
+  });
+
+  it('creates part with default generated quantity to 2', async () => {
+    const createdPartName = 'created part 4';
+    const part = await partsService.createPart({
+      name: createdPartName,
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+      default_generated_quantity: 2,
+    });
+
+    expect(part.default_generated_quantity).toBe(2);
+  });
+
   it('gets part', async () => {
     const getPartName = 'Part 1';
     const part = await partsService.createPart({

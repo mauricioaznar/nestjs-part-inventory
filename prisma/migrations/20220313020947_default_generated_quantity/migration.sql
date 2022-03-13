@@ -6,4 +6,8 @@
 
 */
 -- AlterTable
-ALTER TABLE "PartAssignment" RENAME COLUMN "quantity" TO "required_quantity";
+ALTER TABLE "Part" ADD COLUMN     "default_generated_quantity" INTEGER NOT NULL DEFAULT 1;
+
+-- AlterTable
+ALTER TABLE "PartAssignment" DROP COLUMN "quantity",
+ADD COLUMN     "required_quantity" INTEGER NOT NULL;

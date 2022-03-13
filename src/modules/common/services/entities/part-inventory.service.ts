@@ -48,7 +48,7 @@ export class PartInventoryService {
       await this.prisma.partSubtraction.create({
         data: {
           part_id: component.component_id,
-          quantity: component.required_quantity,
+          quantity: craftInput.quantity * component.required_quantity,
         },
       });
     }

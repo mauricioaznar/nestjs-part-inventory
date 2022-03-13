@@ -248,7 +248,7 @@ describe('part inventory', () => {
     ).resolves.not.toThrow();
   });
 
-  it('crafts, reduces component quantity once crafted and adds to 1 to parent part', async () => {
+  it('crafts, reduces component quantity once crafted and adds to 2 to parent part', async () => {
     const { parent, component } = await createsParentWithOneComponent({
       uniqueName: 'part inventory 5',
       requiredComponentQuantity: 2,
@@ -263,18 +263,18 @@ describe('part inventory', () => {
 
     await partInventoryService.add({
       part_id: component.part_id,
-      quantity: 2,
+      quantity: 4,
     });
 
     const currentComponentQuantity =
       await partInventoryService.getCurrentQuantity(component.part_id);
 
-    expect(currentComponentQuantity).toBe(2);
+    expect(currentComponentQuantity).toBe(4);
 
     await expect(
       partInventoryService.craft({
         part_id: parent.part_id,
-        quantity: 1,
+        quantity: 2,
       }),
     ).resolves.not.toThrow();
 
@@ -287,7 +287,7 @@ describe('part inventory', () => {
       parent.part_id,
     );
 
-    expect(currentParentQuantity).toBe(1);
+    expect(currentParentQuantity).toBe(2);
   });
 
   it('fails to craft or add when quantity is 0 or less', async () => {

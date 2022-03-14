@@ -13,6 +13,11 @@ export class PartAssignmentsService {
     if (!!(await this.hasBeenAssigned(partAssignmentInput))) {
       throw new BadRequestException(`It has been already assigned!`);
     }
+
+    if (!!(await this.hasMaxComponentAssignment(partAssignmentInput))) {
+      throw new BadRequestException(`Max component assignment reached`);
+    }
+
     return this.prisma.partAssignment.create({
       select: {
         component: true,
@@ -39,5 +44,17 @@ export class PartAssignmentsService {
     });
 
     return !!assignment;
+  }
+
+  private async hasMaxComponentAssignment(
+    partAssignmentInput: PartAssignmentInput,
+  ): Promise<boolean> {
+    const assignments = await this.prisma.partAssignment.findMany({
+      where: {
+        parent_id: partAssignmentInput.parent_id,
+      },
+    });
+
+    return assignments.length === 4;
   }
 }

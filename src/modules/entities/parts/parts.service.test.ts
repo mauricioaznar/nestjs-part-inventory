@@ -25,10 +25,6 @@ describe('part service', () => {
     await app.close();
   });
 
-  afterEach(async () => {
-    await app.close();
-  });
-
   it('creates part', async () => {
     const createdPartName = 'created part 2';
     const part = await partsService.createPart({

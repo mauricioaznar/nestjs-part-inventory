@@ -25,19 +25,15 @@ describe('part assignment', () => {
     await app.close();
   });
 
-  afterEach(async () => {
-    await app.close();
-  });
-
   it('get part assignment components', async () => {
     const partComponent1 = await partsService.createPart({
-      name: 'part component in part assignment in 1',
+      name: 'part component in get part assignment 1',
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
 
     const partParent = await partsService.createPart({
-      name: 'part parent in part assignment 1',
+      name: 'part parent in get part assignment 1',
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
@@ -65,13 +61,13 @@ describe('part assignment', () => {
 
   it('fails to assign component when it already has been assigned', async () => {
     const partComponent1 = await partsService.createPart({
-      name: 'part component in part assignment in 1',
+      name: 'part component in has already been assigned 1',
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
 
     const partParent = await partsService.createPart({
-      name: 'part parent in part assignment 1',
+      name: 'part component in has already been assigned 2',
       image_url: null,
       part_category_id: partCategory.part_category_id,
     });
@@ -89,5 +85,41 @@ describe('part assignment', () => {
         component_id: partComponent1.part_id,
       });
     }).rejects.toThrow(/has been already assigned/i);
+  });
+
+  it('fails to assign component when parent has already 4 components assigned', async () => {
+    const partParent = await partsService.createPart({
+      name: 'part parent in max component 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    for (const number in Array.from(Array(4))) {
+      const partComponent = await partsService.createPart({
+        name: `part component in max component ${number + 1}`,
+        image_url: null,
+        part_category_id: partCategory.part_category_id,
+      });
+
+      await partAssignmentsService.assignComponent({
+        required_quantity: 1,
+        parent_id: partParent.part_id,
+        component_id: partComponent.part_id,
+      });
+    }
+
+    const partComponent5 = await partsService.createPart({
+      name: 'part component in max component 5',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    await expect(async () => {
+      await partAssignmentsService.assignComponent({
+        required_quantity: 1,
+        parent_id: partParent.part_id,
+        component_id: partComponent5.part_id,
+      });
+    }).rejects.toThrow(/max component assignment reached/i);
   });
 });

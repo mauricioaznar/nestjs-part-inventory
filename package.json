@@ -17,7 +17,7 @@
     "db:create-migrations": "env-cmd -f .env prisma migrate dev --create-only",
     "db:migrate": "env-cmd -f .env prisma migrate dev",
     "db:format": "env-cmd -f ./.env prisma format",
-    "db:reset": "env-cmd -f ./env prisma reset"
+    "db:reset": "env-cmd -f ./.env prisma migrate reset"
   },
   "prisma": {
     "seed": "ts-node src/modules/seeder/seed.ts"

@@ -44,7 +44,9 @@ export class PartInventoryService {
       ) {
         throw new BadRequestException('Not enough component parts to craft');
       }
+    }
 
+    for (const component of partComponents) {
       await this.prisma.partSubtraction.create({
         data: {
           part_id: component.component_id,

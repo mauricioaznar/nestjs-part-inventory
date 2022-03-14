@@ -6,11 +6,11 @@ import { getAdminToken } from '../../common/__tests__/helpers/get-token';
 describe('Part categories resolver', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await setupApp();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await app.close();
   });
 

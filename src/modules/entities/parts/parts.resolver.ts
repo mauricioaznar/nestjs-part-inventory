@@ -6,7 +6,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import {
   Component,
@@ -20,8 +20,10 @@ import {
   CraftInput,
   FarmInput,
 } from '../../common/dto/entities/part-inventory.dto';
+import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
 
 @Resolver(() => Part)
+@UseGuards(GqlAuthGuard)
 @Injectable()
 export class PartsResolver {
   constructor(

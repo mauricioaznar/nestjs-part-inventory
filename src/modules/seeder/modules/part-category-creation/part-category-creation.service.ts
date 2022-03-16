@@ -24,12 +24,16 @@ export class PartCategoryCreationService {
     const electronics = await this.partCategoriesService.addCategory({
       name: 'Electronics',
     });
+    const deployables = await this.partCategoriesService.addCategory({
+      name: 'Deployables',
+    });
 
     return {
       rawMaterials,
       basicMaterials,
       advancedMaterials,
       electronics,
+      deployables,
     };
   }
 }

@@ -7,6 +7,8 @@ import { AllPartsSeed } from '../../types/all-parts-seed';
 import { ElectronicSeed } from '../../types/electronic-seed';
 import { PartCategoriesSeed } from '../../types/part-categories-seed';
 import { AdvancedMaterialsSeed } from '../../types/advanced-materials-seed';
+import { DeployablesSeed } from '../../types/deployables-seed';
+import { Part } from '../../../common/dto/entities/parts.dto';
 
 @Injectable()
 export class PartCreationService {
@@ -25,12 +27,14 @@ export class PartCreationService {
     const advancedMaterials = await this.createAdvancedMaterials(
       partCategoriesSeed,
     );
+    const deployables = await this.createDeployables(partCategoriesSeed);
 
     return {
       rawMaterials,
       basicMaterials,
       electronics,
       advancedMaterials,
+      deployables,
     };
   }
 
@@ -369,6 +373,48 @@ export class PartCreationService {
       hydrochloricAcid,
       polyaniline,
       syntheticFibers,
+    };
+  }
+
+  private async createDeployables(
+    partCategoriesSeed: PartCategoriesSeed,
+  ): Promise<DeployablesSeed> {
+    const beacon = await this.partsService.createPart({
+      name: 'Beacon',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/b/b3/Beacon.png',
+      part_category_id: partCategoriesSeed.deployables.part_category_id,
+    });
+    const gravTrap = await this.partsService.createPart({
+      name: 'Grav trap',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/5/5d/Grav_Trap.png',
+      part_category_id: partCategoriesSeed.deployables.part_category_id,
+    });
+    const mobileVehicleBay = await this.partsService.createPart({
+      name: 'Mobile vehicle bay',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/3/30/Mobile_Vehicle_Bay.png',
+      part_category_id: partCategoriesSeed.deployables.part_category_id,
+    });
+    const seaglide = await this.partsService.createPart({
+      name: 'Seaglide',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/6a/Seaglide.png',
+      part_category_id: partCategoriesSeed.deployables.part_category_id,
+    });
+    const waterproofLocker = await this.partsService.createPart({
+      name: 'Waterproof locker',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/92/Waterproof_Locker.png',
+      part_category_id: partCategoriesSeed.deployables.part_category_id,
+    });
+    return {
+      beacon,
+      gravTrap,
+      mobileVehicleBay,
+      seaglide,
+      waterproofLocker,
     };
   }
 }

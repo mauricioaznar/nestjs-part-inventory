@@ -6,6 +6,7 @@ import { BasicMaterialsSeed } from '../../types/basic-materials-seed';
 import { AllPartsSeed } from '../../types/all-parts-seed';
 import { ElectronicSeed } from '../../types/electronic-seed';
 import { PartCategoriesSeed } from '../../types/part-categories-seed';
+import { AdvancedMaterialsSeed } from '../../types/advanced-materials-seed';
 
 @Injectable()
 export class PartCreationService {
@@ -21,11 +22,15 @@ export class PartCreationService {
     const rawMaterials = await this.createRawMaterials(partCategoriesSeed);
     const basicMaterials = await this.createBasicMaterials(partCategoriesSeed);
     const electronics = await this.createElectronics(partCategoriesSeed);
+    const advancedMaterials = await this.createAdvancedMaterials(
+      partCategoriesSeed,
+    );
 
     return {
       rawMaterials,
       basicMaterials,
       electronics,
+      advancedMaterials,
     };
   }
 
@@ -314,6 +319,56 @@ export class PartCreationService {
       ionBattery,
       powerCell,
       wiringKit,
+    };
+  }
+
+  private async createAdvancedMaterials(
+    partCategoriesSeed: PartCategoriesSeed,
+  ): Promise<AdvancedMaterialsSeed> {
+    const aerogel = await this.partsService.createPart({
+      name: 'Aerogel',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/66/Aerogel.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+    const benzene = await this.partsService.createPart({
+      name: 'Benzene',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/9b/Benzene.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+    const hydraulicFluid = await this.partsService.createPart({
+      name: 'Hydraulic fluid',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/3/3d/Hydraulic_Fluid_Icon.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+    const hydrochloricAcid = await this.partsService.createPart({
+      name: 'Hydrochloric acid',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/9a/Hydrochloric_Acid.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+    const polyaniline = await this.partsService.createPart({
+      name: 'Polyaniline',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/8/82/Polyaniline.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+    const syntheticFibers = await this.partsService.createPart({
+      name: 'Synthetic fibers',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/8/86/Synthetic_Fibers.png',
+      part_category_id: partCategoriesSeed.advancedMaterials.part_category_id,
+    });
+
+    return {
+      aerogel,
+      benzene,
+      hydraulicFluid,
+      hydrochloricAcid,
+      polyaniline,
+      syntheticFibers,
     };
   }
 }

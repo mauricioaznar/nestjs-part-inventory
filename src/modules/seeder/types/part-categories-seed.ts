@@ -4,4 +4,5 @@ export interface PartCategoriesSeed {
   basicMaterials: PartCategory;
   electronics: PartCategory;
   rawMaterials: PartCategory;
+  advancedMaterials: PartCategory;
 }

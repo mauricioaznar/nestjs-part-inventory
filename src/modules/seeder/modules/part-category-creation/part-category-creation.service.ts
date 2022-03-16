@@ -18,20 +18,20 @@ export class PartCategoryCreationService {
   ) {}
 
   async createPartCategories(): Promise<PartCategoriesSeed> {
+    const rawMaterials = await this.partCategoriesService.addCategory({
+      name: 'Raw materials',
+    });
     const basicMaterials = await this.partCategoriesService.addCategory({
       name: 'Basic materials',
     });
     const electronics = await this.partCategoriesService.addCategory({
       name: 'Electronics',
     });
-    const rawMaterials = await this.partCategoriesService.addCategory({
-      name: 'Raw materials',
-    });
 
     return {
+      rawMaterials,
       basicMaterials,
       electronics,
-      rawMaterials,
     };
   }
 }

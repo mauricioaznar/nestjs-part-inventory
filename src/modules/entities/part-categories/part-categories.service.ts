@@ -43,6 +43,9 @@ export class PartCategoriesService {
       where: {
         part_category_id: partCategory.part_category_id,
       },
+      orderBy: {
+        name: 'asc',
+      },
     });
   }
 }

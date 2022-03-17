@@ -9,6 +9,8 @@ import { PartCategoriesSeed } from '../../types/part-categories-seed';
 import { AdvancedMaterialsSeed } from '../../types/advanced-materials-seed';
 import { DeployablesSeed } from '../../types/deployables-seed';
 import { Part } from '../../../common/dto/entities/parts.dto';
+import { EquipmentsSeed } from '../../types/equipments-seed';
+import { ToolsSeed } from '../../types/tools-seed';
 
 @Injectable()
 export class PartCreationService {
@@ -28,6 +30,8 @@ export class PartCreationService {
       partCategoriesSeed,
     );
     const deployables = await this.createDeployables(partCategoriesSeed);
+    const equipments = await this.createEquipments(partCategoriesSeed);
+    const tools = await this.createTools(partCategoriesSeed);
 
     return {
       rawMaterials,
@@ -35,6 +39,8 @@ export class PartCreationService {
       electronics,
       advancedMaterials,
       deployables,
+      equipments,
+      tools,
     };
   }
 
@@ -415,6 +421,189 @@ export class PartCreationService {
       mobileVehicleBay,
       seaglide,
       waterproofLocker,
+    };
+  }
+
+  private async createEquipments(
+    partCategoriesSeed: PartCategoriesSeed,
+  ): Promise<EquipmentsSeed> {
+    const compass = await this.partsService.createPart({
+      name: 'Compass',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/9/92/Compass.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+    const fins = await this.partsService.createPart({
+      name: 'Fins',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/c/ce/Fins.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+    const fireExtinguisher = await this.partsService.createPart({
+      name: 'Fire extinguisher',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/0/0a/Fire_Extinguisher.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+    const firstAidKit = await this.partsService.createPart({
+      name: 'First aid kit',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/5/50/First_Aid_Kit.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+    const headlamp = await this.partsService.createPart({
+      name: 'Head lamp',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/5/5e/Headlamp_Icon.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const highCapacityO2Tank = await this.partsService.createPart({
+      name: 'High capacity tank',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/b/b1/High_Capacity_Tank.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const lightweightHighCapacityTank = await this.partsService.createPart({
+      name: 'High capacity tank',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/8/81/Plasteel_Tank.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const radiationSuit = await this.partsService.createPart({
+      name: 'Radiation suit',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/3/3f/Radiation_Suit.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const rebreather = await this.partsService.createPart({
+      name: 'Rebreather',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/b/bb/Rebreather.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const standardO2Tank = await this.partsService.createPart({
+      name: 'Standard tank',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/c/cb/Standard_O%E2%82%82_Tank.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    const ultraHighCapacityTank = await this.partsService.createPart({
+      name: 'Ultra high capacity tank',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/e/ee/Ultra_High_Capacity_Tank.png',
+      part_category_id: partCategoriesSeed.equipments.part_category_id,
+    });
+
+    return {
+      compass,
+      fins,
+      fireExtinguisher,
+      firstAidKit,
+      headlamp,
+      highCapacityO2Tank,
+      lightweightHighCapacityTank,
+      radiationSuit,
+      rebreather,
+      standardO2Tank,
+      ultraHighCapacityTank,
+    };
+  }
+
+  private async createTools(
+    partCategoriesSeed: PartCategoriesSeed,
+  ): Promise<ToolsSeed> {
+    const airBladder = await this.partsService.createPart({
+      name: 'Air bladder',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/8/86/Air_Bladder.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const flare = await this.partsService.createPart({
+      name: 'Flare',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/5/54/Flare.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const flashlight = await this.partsService.createPart({
+      name: 'Flashlight',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/4/4d/Flashlight.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const habitatBuilder = await this.partsService.createPart({
+      name: 'Habitat builder',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/5/5c/Habitat_Builder.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const laserCutter = await this.partsService.createPart({
+      name: 'Laser cutter',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/3/33/Laser_Cutter.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const pathfinderTool = await this.partsService.createPart({
+      name: 'Pathfinder tool',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/1/13/Pathfinder_Tool.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const propulsionCannon = await this.partsService.createPart({
+      name: 'Propulsion cannon',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/63/Propulsion_Cannon.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const repairTool = await this.partsService.createPart({
+      name: 'Repair tool',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/e/ea/Repair_Tool.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const thermoblade = await this.partsService.createPart({
+      name: 'Thermoblade',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/4/4b/Thermoblade.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const scanner = await this.partsService.createPart({
+      name: 'Scanner',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/7/78/Scanner.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const survivalKnife = await this.partsService.createPart({
+      name: 'Survival knife',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/6/6e/Survival_Knife.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+    const lightStick = await this.partsService.createPart({
+      name: 'Light stick',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/a/ad/LED_Light.png',
+      part_category_id: partCategoriesSeed.tools.part_category_id,
+    });
+
+    return {
+      airBladder,
+      flare,
+      flashlight,
+      habitatBuilder,
+      laserCutter,
+      pathfinderTool,
+      propulsionCannon,
+      repairTool,
+      thermoblade,
+      scanner,
+      survivalKnife,
+      lightStick,
     };
   }
 }

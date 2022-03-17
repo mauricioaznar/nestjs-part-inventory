@@ -6,4 +6,6 @@ export interface PartCategoriesSeed {
   rawMaterials: PartCategory;
   advancedMaterials: PartCategory;
   deployables: PartCategory;
+  equipments: PartCategory;
+  tools: PartCategory;
 }

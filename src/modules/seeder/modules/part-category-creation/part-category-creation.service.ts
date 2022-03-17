@@ -27,6 +27,12 @@ export class PartCategoryCreationService {
     const deployables = await this.partCategoriesService.addCategory({
       name: 'Deployables',
     });
+    const equipments = await this.partCategoriesService.addCategory({
+      name: 'Equipments',
+    });
+    const tools = await this.partCategoriesService.addCategory({
+      name: 'Tools',
+    });
 
     return {
       rawMaterials,
@@ -34,6 +40,8 @@ export class PartCategoryCreationService {
       advancedMaterials,
       electronics,
       deployables,
+      equipments,
+      tools,
     };
   }
 }

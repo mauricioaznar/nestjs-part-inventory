@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../common/services/prisma/prisma.service';
 import { PartAssignmentsService } from '../../../common/services/entities/part-assignments.service';
 import { AllPartsSeed } from '../../types/all-parts-seed';
-import { raceWith } from 'rxjs';
 
 @Injectable()
 export class PartAssignmentCreationService {
@@ -486,7 +485,6 @@ export class PartAssignmentCreationService {
     rawMaterials,
     basicMaterials,
     electronics,
-    equipments,
     tools,
   }: AllPartsSeed): Promise<void> {
     // air bladder

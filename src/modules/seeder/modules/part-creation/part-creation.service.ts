@@ -203,6 +203,12 @@ export class PartCreationService {
         'https://static.wikia.nocookie.net/subnautica/images/f/ff/Acid_Mushroom.png',
       part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
     });
+    const bladderfish = await this.partsService.createPart({
+      name: 'Bladderfish',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/a/a5/Bladderfish.png',
+      part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
+    });
 
     return {
       copperOre,
@@ -231,6 +237,7 @@ export class PartCreationService {
       bloodOil,
       deepShroom,
       acidShroom,
+      bladderfish,
     };
   }
 

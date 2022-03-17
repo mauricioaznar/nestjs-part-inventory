@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../common/services/prisma/prisma.service';
 import { PartAssignmentsService } from '../../../common/services/entities/part-assignments.service';
 import { AllPartsSeed } from '../../types/all-parts-seed';
+import { raceWith } from 'rxjs';
 
 @Injectable()
 export class PartAssignmentCreationService {
@@ -17,6 +18,7 @@ export class PartAssignmentCreationService {
     await this.makeAssignmentsForElectronics(allPartsSeed);
     await this.makeAssignmentsForDeployables(allPartsSeed);
     await this.makeAssignmentsForEquipments(allPartsSeed);
+    await this.makeAssignmentsForTools(allPartsSeed);
   }
 
   private async makeAssignmentsForBasicMaterials({
@@ -477,6 +479,188 @@ export class PartAssignmentCreationService {
       parent_id: equipments.ultraHighCapacityTank.part_id,
       component_id: rawMaterials.lithium.part_id,
       required_quantity: 4,
+    });
+  }
+
+  private async makeAssignmentsForTools({
+    rawMaterials,
+    basicMaterials,
+    electronics,
+    equipments,
+    tools,
+  }: AllPartsSeed): Promise<void> {
+    // air bladder
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.airBladder.part_id,
+      component_id: rawMaterials.bladderfish.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.airBladder.part_id,
+      component_id: basicMaterials.siliconeRubber.part_id,
+      required_quantity: 1,
+    });
+
+    // flare
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.flare.part_id,
+      component_id: rawMaterials.caveSulfur.part_id,
+      required_quantity: 1,
+    });
+
+    // flashlight
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.flashlight.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.flashlight.part_id,
+      component_id: basicMaterials.glass.part_id,
+      required_quantity: 1,
+    });
+
+    // habitat builder
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.habitatBuilder.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.habitatBuilder.part_id,
+      component_id: electronics.computerChip.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.habitatBuilder.part_id,
+      component_id: electronics.wiringKit.part_id,
+      required_quantity: 1,
+    });
+
+    // laser cutter
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.laserCutter.part_id,
+      component_id: rawMaterials.diamond.part_id,
+      required_quantity: 2,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.laserCutter.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.laserCutter.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.laserCutter.part_id,
+      component_id: rawMaterials.caveSulfur.part_id,
+      required_quantity: 1,
+    });
+
+    // light stick
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.lightStick.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.lightStick.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.lightStick.part_id,
+      component_id: basicMaterials.glass.part_id,
+      required_quantity: 1,
+    });
+
+    // pathfinder tool
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.pathfinderTool.part_id,
+      component_id: rawMaterials.creepvineSeedCluster.part_id,
+      required_quantity: 2,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.pathfinderTool.part_id,
+      component_id: electronics.copperWire.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.pathfinderTool.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+
+    // propulsion cannon
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.propulsionCannon.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.propulsionCannon.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.propulsionCannon.part_id,
+      component_id: electronics.wiringKit.part_id,
+      required_quantity: 1,
+    });
+
+    // repair tool
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.repairTool.part_id,
+      component_id: rawMaterials.caveSulfur.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.repairTool.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.repairTool.part_id,
+      component_id: basicMaterials.siliconeRubber.part_id,
+      required_quantity: 1,
+    });
+
+    // scanner
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.scanner.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.scanner.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+
+    // survival knife
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.survivalKnife.part_id,
+      component_id: basicMaterials.siliconeRubber.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.survivalKnife.part_id,
+      component_id: rawMaterials.titanium.part_id,
+      required_quantity: 1,
+    });
+
+    // thermoblade
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.thermoblade.part_id,
+      component_id: tools.survivalKnife.part_id,
+      required_quantity: 1,
+    });
+    await this.partAssignmentService.assignComponent({
+      parent_id: tools.thermoblade.part_id,
+      component_id: electronics.battery.part_id,
+      required_quantity: 1,
     });
   }
 }

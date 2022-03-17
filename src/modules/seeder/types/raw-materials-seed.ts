@@ -27,4 +27,5 @@ export interface RawMaterialsSeed {
   bloodOil: Part;
   deepShroom: Part;
   acidShroom: Part;
+  bladderfish: Part;
 }

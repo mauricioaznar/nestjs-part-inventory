@@ -84,7 +84,7 @@ describe('part assignment', () => {
         parent_id: partParent.part_id,
         component_id: partComponent1.part_id,
       });
-    }).rejects.toThrow(/has been already assigned/i);
+    }).rejects.toThrow(/has been already assigned to/i);
   });
 
   it('fails to assign component when parent has already 4 components assigned', async () => {

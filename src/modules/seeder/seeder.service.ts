@@ -25,9 +25,7 @@ export class SeederService {
     const allPartsSeed = await this.partCreationService.createParts(
       partCategoriesSeed,
     );
-    await this.partAssignmentService.makeAssignmentsForBasicMaterials(
-      allPartsSeed,
-    );
+    await this.partAssignmentService.makeAssignments(allPartsSeed);
   }
 
   async user(): Promise<User> {

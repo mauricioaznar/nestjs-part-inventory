@@ -11,7 +11,19 @@ export class PartAssignmentsService {
     partAssignmentInput: PartAssignmentInput,
   ): Promise<Component> {
     if (!!(await this.hasBeenAssigned(partAssignmentInput))) {
-      throw new BadRequestException(`It has been already assigned!`);
+      const parent = await this.prisma.part.findFirst({
+        where: {
+          part_id: partAssignmentInput.parent_id,
+        },
+      });
+      const component = await this.prisma.part.findFirst({
+        where: {
+          part_id: partAssignmentInput.component_id,
+        },
+      });
+      throw new BadRequestException(
+        `${parent.name} has been already assigned to ${component.name}.`,
+      );
     }
 
     if (!!(await this.hasMaxComponentAssignment(partAssignmentInput))) {

@@ -185,6 +185,24 @@ export class PartCreationService {
         'https://static.wikia.nocookie.net/subnautica/images/9/94/Stalker_Tooth.png',
       part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
     });
+    const bloodOil = await this.partsService.createPart({
+      name: 'Blood oil',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/7/7b/Blood_Oil.png',
+      part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
+    });
+    const deepShroom = await this.partsService.createPart({
+      name: 'Deep shroom',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/e/e5/Deep_Shroom.png',
+      part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
+    });
+    const acidShroom = await this.partsService.createPart({
+      name: 'Acid shroom',
+      image_url:
+        'https://static.wikia.nocookie.net/subnautica/images/f/ff/Acid_Mushroom.png',
+      part_category_id: partCategoriesSeed.rawMaterials.part_category_id,
+    });
 
     return {
       copperOre,
@@ -210,6 +228,9 @@ export class PartCreationService {
       gelSack,
       tableCoralSample,
       stalkerTeeth,
+      bloodOil,
+      deepShroom,
+      acidShroom,
     };
   }
 
@@ -466,7 +487,7 @@ export class PartCreationService {
     });
 
     const lightweightHighCapacityTank = await this.partsService.createPart({
-      name: 'High capacity tank',
+      name: 'Lightweight high capacity tank',
       image_url:
         'https://static.wikia.nocookie.net/subnautica/images/8/81/Plasteel_Tank.png',
       part_category_id: partCategoriesSeed.equipments.part_category_id,

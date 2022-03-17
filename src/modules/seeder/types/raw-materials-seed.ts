@@ -24,4 +24,7 @@ export interface RawMaterialsSeed {
   gelSack: Part;
   tableCoralSample: Part;
   stalkerTeeth: Part;
+  bloodOil: Part;
+  deepShroom: Part;
+  acidShroom: Part;
 }

@@ -20,7 +20,7 @@ export class PartsService {
   async getPart(id: number): Promise<Part> {
     return this.prisma.part.findFirst({
       where: {
-        part_id: id,
+        partId: id,
       },
     });
   }
@@ -34,7 +34,7 @@ export class PartsService {
 
     return this.prisma.part.update({
       where: {
-        part_id: id,
+        partId: id,
       },
       data: {
         name: partInput.name,
@@ -54,7 +54,7 @@ export class PartsService {
         requiredQuantity: true,
       },
       where: {
-        parentId: part.part_id,
+        parentId: part.partId,
       },
     });
   }
@@ -66,7 +66,7 @@ export class PartsService {
         requiredQuantity: true,
       },
       where: {
-        componentId: part.part_id,
+        componentId: part.partId,
       },
     });
   }

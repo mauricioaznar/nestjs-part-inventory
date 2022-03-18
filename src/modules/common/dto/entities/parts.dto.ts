@@ -22,7 +22,7 @@ export class PartInput extends PartBase {}
 @ObjectType('Part')
 export class Part extends PartBase {
   @Field({ nullable: false })
-  part_id: number;
+  partId: number;
 }
 
 @ObjectType('ComponentAssignment')

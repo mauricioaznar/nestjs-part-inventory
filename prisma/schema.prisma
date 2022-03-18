@@ -17,7 +17,7 @@ model User {
 }
 
 model Part {
-  part_id               Int               @id @default(autoincrement())
+  partId               Int               @id @default(autoincrement())
   name                  String            @db.Text
   comment               String?           @db.Text
   imageUrl             String?
@@ -37,9 +37,9 @@ model PartCategory {
 }
 
 model PartAssignment {
-  parent            Part @relation("parentAssignments", fields: [parentId], references: [part_id])
+  parent            Part @relation("parentAssignments", fields: [parentId], references: [partId])
   parentId         Int
-  component         Part @relation("componentAssignments", fields: [componentId], references: [part_id])
+  component         Part @relation("componentAssignments", fields: [componentId], references: [partId])
   componentId      Int
   requiredQuantity Int
 
@@ -48,14 +48,14 @@ model PartAssignment {
 
 model PartAddition {
   id       Int  @id @default(autoincrement())
-  part_id  Int
-  part     Part @relation("additions", fields: [part_id], references: [part_id])
+  partId  Int
+  part     Part @relation("additions", fields: [partId], references: [partId])
   quantity Int
 }
 
 model PartSubtraction {
   id       Int  @id @default(autoincrement())
-  part_id  Int
-  part     Part @relation("subtractions", fields: [part_id], references: [part_id])
+  partId  Int
+  part     Part @relation("subtractions", fields: [partId], references: [partId])
   quantity Int
 }

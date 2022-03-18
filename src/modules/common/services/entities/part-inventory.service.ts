@@ -13,7 +13,7 @@ export class PartInventoryService {
   }
 
   async craft(craftInput: CraftInput): Promise<void> {
-    const doesPartExist = await this.doesPartExist(craftInput.part_id);
+    const doesPartExist = await this.doesPartExist(craftInput.partId);
 
     if (!doesPartExist) {
       throw new BadRequestException('Part not found');
@@ -21,7 +21,7 @@ export class PartInventoryService {
 
     const partComponents = await this.prisma.partAssignment.findMany({
       where: {
-        parentId: craftInput.part_id,
+        parentId: craftInput.partId,
       },
     });
 
@@ -49,7 +49,7 @@ export class PartInventoryService {
     for (const component of partComponents) {
       await this.prisma.partSubtraction.create({
         data: {
-          part_id: component.componentId,
+          partId: component.componentId,
           quantity: craftInput.quantity * component.requiredQuantity,
         },
       });
@@ -57,20 +57,20 @@ export class PartInventoryService {
 
     const parent = await this.prisma.part.findFirst({
       where: {
-        part_id: craftInput.part_id,
+        partId: craftInput.partId,
       },
     });
 
     await this.prisma.partAddition.create({
       data: {
-        part_id: craftInput.part_id,
+        partId: craftInput.partId,
         quantity: craftInput.quantity * parent.defaultGeneratedQuantity,
       },
     });
   }
 
   async add(farmInput: FarmInput): Promise<void> {
-    if (!(await this.doesPartExist(farmInput.part_id))) {
+    if (!(await this.doesPartExist(farmInput.partId))) {
       throw new BadRequestException('Part not found');
     }
 
@@ -84,7 +84,7 @@ export class PartInventoryService {
         },
       },
       where: {
-        part_id: farmInput.part_id,
+        partId: farmInput.partId,
       },
     });
 
@@ -98,14 +98,14 @@ export class PartInventoryService {
 
     await this.prisma.partAddition.create({
       data: {
-        part_id: farmInput.part_id,
+        partId: farmInput.partId,
         quantity: farmInput.quantity,
       },
     });
   }
 
   private async doesPartExist(partId: number): Promise<boolean> {
-    return !!(await this.prisma.part.findFirst({ where: { part_id: partId } }));
+    return !!(await this.prisma.part.findFirst({ where: { partId: partId } }));
   }
 
   private async getAdditionsTotal(partId: number): Promise<number> {
@@ -116,7 +116,7 @@ export class PartInventoryService {
         quantity: true,
       },
       where: {
-        part_id: partId,
+        partId: partId,
       },
     });
     return quantity || 0;
@@ -130,7 +130,7 @@ export class PartInventoryService {
         quantity: true,
       },
       where: {
-        part_id: partId,
+        partId: partId,
       },
     });
     return quantity || 0;

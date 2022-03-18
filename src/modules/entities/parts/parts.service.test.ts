@@ -67,7 +67,7 @@ describe('part service', () => {
       partCategoryId: partCategory.partCategoryId,
     });
 
-    const getPart = await partsService.getPart(part.part_id);
+    const getPart = await partsService.getPart(part.partId);
 
     expect(getPart.name).toBe(getPartName);
   });
@@ -80,7 +80,7 @@ describe('part service', () => {
     });
 
     const updatedName = 'updated part zxc 1';
-    const updatedPart = await partsService.updatePart(part.part_id, {
+    const updatedPart = await partsService.updatePart(part.partId, {
       name: updatedName,
       partCategoryId: part.partCategoryId,
     });
@@ -150,15 +150,15 @@ describe('part service', () => {
     const partComponent1RequiredQuantity = 1;
     await partAssignmentsService.assignComponent({
       requiredQuantity: 1,
-      parentId: partParent.part_id,
-      componentId: partComponent1.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent1.partId,
     });
 
     const partComponent2RequiredQuantity = 3;
     await partAssignmentsService.assignComponent({
       requiredQuantity: partComponent2RequiredQuantity,
-      parentId: partParent.part_id,
-      componentId: partComponent2.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent2.partId,
     });
 
     const components = await partsService.getComponentAssignments(partParent);
@@ -203,15 +203,15 @@ describe('part service', () => {
     const partComponent1RequiredQuantity = 1;
     await partAssignmentsService.assignComponent({
       requiredQuantity: 1,
-      parentId: partParent1.part_id,
-      componentId: partComponent.part_id,
+      parentId: partParent1.partId,
+      componentId: partComponent.partId,
     });
 
     const partComponent2RequiredQuantity = 3;
     await partAssignmentsService.assignComponent({
       requiredQuantity: partComponent2RequiredQuantity,
-      parentId: partParent2.part_id,
-      componentId: partComponent.part_id,
+      parentId: partParent2.partId,
+      componentId: partComponent.partId,
     });
 
     const parents = await partsService.getParentAssignments(partComponent);

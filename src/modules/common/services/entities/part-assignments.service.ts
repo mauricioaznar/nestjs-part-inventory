@@ -13,12 +13,12 @@ export class PartAssignmentsService {
     if (!!(await this.hasBeenAssigned(partAssignmentInput))) {
       const parent = await this.prisma.part.findFirst({
         where: {
-          part_id: partAssignmentInput.parentId,
+          partId: partAssignmentInput.parentId,
         },
       });
       const component = await this.prisma.part.findFirst({
         where: {
-          part_id: partAssignmentInput.componentId,
+          partId: partAssignmentInput.componentId,
         },
       });
       throw new BadRequestException(

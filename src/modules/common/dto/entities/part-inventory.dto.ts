@@ -3,7 +3,7 @@ import { Field, InputType } from '@nestjs/graphql';
 @InputType('CraftInput')
 export class CraftInput {
   @Field({ nullable: false })
-  part_id: number;
+  partId: number;
 
   @Field({ nullable: false })
   quantity: number;
@@ -12,7 +12,7 @@ export class CraftInput {
 @InputType('FarmInput')
 export class FarmInput {
   @Field({ nullable: false })
-  part_id: number;
+  partId: number;
 
   @Field({ nullable: false })
   quantity: number;

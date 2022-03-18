@@ -82,6 +82,6 @@ export class PartsResolver {
 
   @ResolveField(() => Int)
   async currentQuantity(part: Part) {
-    return this.partInventoryService.getCurrentQuantity(part.part_id);
+    return this.partInventoryService.getCurrentQuantity(part.partId);
   }
 }

@@ -41,8 +41,8 @@ describe('part assignment', () => {
     const partComponent1RequiredQuantity = 1;
     await partAssignmentsService.assignComponent({
       requiredQuantity: partComponent1RequiredQuantity,
-      parentId: partParent.part_id,
-      componentId: partComponent1.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent1.partId,
     });
 
     const components = await partsService.getComponentAssignments(partParent);
@@ -74,15 +74,15 @@ describe('part assignment', () => {
 
     await partAssignmentsService.assignComponent({
       requiredQuantity: 1,
-      parentId: partParent.part_id,
-      componentId: partComponent1.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent1.partId,
     });
 
     await expect(async () => {
       await partAssignmentsService.assignComponent({
         requiredQuantity: 1,
-        parentId: partParent.part_id,
-        componentId: partComponent1.part_id,
+        parentId: partParent.partId,
+        componentId: partComponent1.partId,
       });
     }).rejects.toThrow(/has been already assigned to/i);
   });
@@ -103,8 +103,8 @@ describe('part assignment', () => {
 
       await partAssignmentsService.assignComponent({
         requiredQuantity: 1,
-        parentId: partParent.part_id,
-        componentId: partComponent.part_id,
+        parentId: partParent.partId,
+        componentId: partComponent.partId,
       });
     }
 
@@ -117,8 +117,8 @@ describe('part assignment', () => {
     await expect(async () => {
       await partAssignmentsService.assignComponent({
         requiredQuantity: 1,
-        parentId: partParent.part_id,
-        componentId: partComponent5.part_id,
+        parentId: partParent.partId,
+        componentId: partComponent5.partId,
       });
     }).rejects.toThrow(/max component assignment reached/i);
   });

@@ -68,8 +68,8 @@ describe('part inventory', () => {
 
     await partAssignmentsService.assignComponent({
       requiredQuantity: requiredComponentQuantity,
-      parentId: partParent.part_id,
-      componentId: partComponent.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent.partId,
     });
 
     const components = await partsService.getComponentAssignments(partParent);
@@ -121,14 +121,14 @@ describe('part inventory', () => {
 
     await partAssignmentsService.assignComponent({
       requiredQuantity: requiredComponentsQuantity,
-      parentId: partParent.part_id,
-      componentId: partComponent1.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent1.partId,
     });
 
     await partAssignmentsService.assignComponent({
       requiredQuantity: requiredComponentsQuantity,
-      parentId: partParent.part_id,
-      componentId: partComponent2.part_id,
+      parentId: partParent.partId,
+      componentId: partComponent2.partId,
     });
 
     const components = await partsService.getComponentAssignments(partParent);
@@ -164,7 +164,7 @@ describe('part inventory', () => {
     });
 
     const currentParentQuantity = await partInventoryService.getCurrentQuantity(
-      parent.part_id,
+      parent.partId,
     );
 
     expect(currentParentQuantity).toBe(0);
@@ -177,14 +177,14 @@ describe('part inventory', () => {
     });
 
     const currentParentQuantity = await partInventoryService.getCurrentQuantity(
-      parent.part_id,
+      parent.partId,
     );
 
     expect(currentParentQuantity).toBe(0);
 
     await expect(async () => {
       await partInventoryService.add({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/cannot be added, it must be crafted/i);
@@ -195,7 +195,7 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.add({
-        part_id: veryLargeNonexistentId,
+        partId: veryLargeNonexistentId,
         quantity: 1,
       });
     }).rejects.toThrow(/part not found/i);
@@ -208,26 +208,26 @@ describe('part inventory', () => {
     });
 
     await partInventoryService.add({
-      part_id: component.part_id,
+      partId: component.partId,
       quantity: 1,
     });
 
     await expect(async () => {
       await partInventoryService.add({
-        part_id: component.part_id,
+        partId: component.partId,
         quantity: 0,
       });
     }).rejects.toThrow(/quantity must be bigger than 0/i);
 
     await expect(async () => {
       await partInventoryService.add({
-        part_id: component.part_id,
+        partId: component.partId,
         quantity: -1,
       });
     }).rejects.toThrow(/quantity must be bigger than 0/i);
 
     const currentComponentQuantity =
-      await partInventoryService.getCurrentQuantity(component.part_id);
+      await partInventoryService.getCurrentQuantity(component.partId);
 
     expect(currentComponentQuantity).toBe(1);
   });
@@ -238,18 +238,18 @@ describe('part inventory', () => {
     });
 
     const currentQuantity = await partInventoryService.getCurrentQuantity(
-      part.part_id,
+      part.partId,
     );
 
     expect(currentQuantity).toBe(0);
 
     await partInventoryService.add({
-      part_id: part.part_id,
+      partId: part.partId,
       quantity: 2,
     });
 
     const newCurrentQuantity = await partInventoryService.getCurrentQuantity(
-      part.part_id,
+      part.partId,
     );
 
     expect(newCurrentQuantity).toBe(2);
@@ -260,7 +260,7 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: veryLargeNonexistentId,
+        partId: veryLargeNonexistentId,
         quantity: 1,
       });
     }).rejects.toThrow(/part not found/i);
@@ -273,7 +273,7 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: part.part_id,
+        partId: part.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/cannot be crafted/i);
@@ -288,42 +288,42 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/not enough/i);
 
     await partInventoryService.add({
-      part_id: component1.part_id,
+      partId: component1.partId,
       quantity: 2,
     });
 
     let currentComponent1Quantity =
-      await partInventoryService.getCurrentQuantity(component1.part_id);
+      await partInventoryService.getCurrentQuantity(component1.partId);
 
     expect(currentComponent1Quantity).toBe(2);
 
     let currentComponent2Quantity =
-      await partInventoryService.getCurrentQuantity(component2.part_id);
+      await partInventoryService.getCurrentQuantity(component2.partId);
 
     expect(currentComponent2Quantity).toBe(0);
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/not enough/i);
 
     // doesnt reduce any component quantity when parent doesnt have at least one component that doesnt meet the requirements
     currentComponent1Quantity = await partInventoryService.getCurrentQuantity(
-      component1.part_id,
+      component1.partId,
     );
 
     expect(currentComponent1Quantity).toBe(2);
 
     currentComponent2Quantity = await partInventoryService.getCurrentQuantity(
-      component2.part_id,
+      component2.partId,
     );
 
     expect(currentComponent2Quantity).toBe(0);
@@ -336,31 +336,31 @@ describe('part inventory', () => {
     });
 
     await partInventoryService.add({
-      part_id: component.part_id,
+      partId: component.partId,
       quantity: 2,
     });
 
     const currentComponentQuantity =
-      await partInventoryService.getCurrentQuantity(component.part_id);
+      await partInventoryService.getCurrentQuantity(component.partId);
 
     expect(currentComponentQuantity).toBe(2);
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 0,
       });
     }).rejects.toThrow(/quantity must be bigger than 0/i);
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: -1,
       });
     }).rejects.toThrow(/quantity must be bigger than 0/i);
 
     const currentParentQuantity = await partInventoryService.getCurrentQuantity(
-      parent.part_id,
+      parent.partId,
     );
 
     expect(currentParentQuantity).toBe(0);
@@ -375,46 +375,46 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/not enough/i);
 
     await partInventoryService.add({
-      part_id: component1.part_id,
+      partId: component1.partId,
       quantity: 4,
     });
 
     let currentComponent1Quantity =
-      await partInventoryService.getCurrentQuantity(component1.part_id);
+      await partInventoryService.getCurrentQuantity(component1.partId);
 
     expect(currentComponent1Quantity).toBe(4);
 
     await partInventoryService.add({
-      part_id: component2.part_id,
+      partId: component2.partId,
       quantity: 2,
     });
 
     let currentComponent2Quantity =
-      await partInventoryService.getCurrentQuantity(component2.part_id);
+      await partInventoryService.getCurrentQuantity(component2.partId);
 
     expect(currentComponent2Quantity).toBe(2);
 
     await expect(
       partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       }),
     ).resolves.not.toThrow();
 
     currentComponent1Quantity = await partInventoryService.getCurrentQuantity(
-      component1.part_id,
+      component1.partId,
     );
 
     expect(currentComponent1Quantity).toBe(2);
 
     currentComponent2Quantity = await partInventoryService.getCurrentQuantity(
-      component2.part_id,
+      component2.partId,
     );
 
     expect(currentComponent2Quantity).toBe(0);
@@ -429,52 +429,52 @@ describe('part inventory', () => {
 
     await expect(async () => {
       await partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 1,
       });
     }).rejects.toThrow(/not enough/i);
 
     await partInventoryService.add({
-      part_id: component1.part_id,
+      partId: component1.partId,
       quantity: 6,
     });
 
     let currentComponent1Quantity =
-      await partInventoryService.getCurrentQuantity(component1.part_id);
+      await partInventoryService.getCurrentQuantity(component1.partId);
 
     expect(currentComponent1Quantity).toBe(6);
 
     await partInventoryService.add({
-      part_id: component2.part_id,
+      partId: component2.partId,
       quantity: 4,
     });
 
     let currentComponent2Quantity =
-      await partInventoryService.getCurrentQuantity(component2.part_id);
+      await partInventoryService.getCurrentQuantity(component2.partId);
 
     expect(currentComponent2Quantity).toBe(4);
 
     await expect(
       partInventoryService.craft({
-        part_id: parent.part_id,
+        partId: parent.partId,
         quantity: 2,
       }),
     ).resolves.not.toThrow();
 
     currentComponent1Quantity = await partInventoryService.getCurrentQuantity(
-      component1.part_id,
+      component1.partId,
     );
 
     expect(currentComponent1Quantity).toBe(2);
 
     currentComponent2Quantity = await partInventoryService.getCurrentQuantity(
-      component2.part_id,
+      component2.partId,
     );
 
     expect(currentComponent2Quantity).toBe(0);
 
     const currentParentQuantity = await partInventoryService.getCurrentQuantity(
-      parent.part_id,
+      parent.partId,
     );
     expect(currentParentQuantity).toBe(2);
   });

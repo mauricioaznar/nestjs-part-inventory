@@ -4,7 +4,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 @InputType({ isAbstract: true })
 export class PartSubtractionBase {
   @Field({ nullable: false })
-  part_id: number;
+  partId: number;
 
   @Field({ nullable: false })
   quantity: number;

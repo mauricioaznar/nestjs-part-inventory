@@ -67,12 +67,12 @@ describe('part inventory', () => {
     });
 
     await partAssignmentsService.assignComponent({
-      required_quantity: requiredComponentQuantity,
-      parent_id: partParent.part_id,
-      component_id: partComponent.part_id,
+      requiredQuantity: requiredComponentQuantity,
+      parentId: partParent.part_id,
+      componentId: partComponent.part_id,
     });
 
-    const components = await partsService.getComponents(partParent);
+    const components = await partsService.getComponentAssignments(partParent);
 
     expect(components).toEqual(
       expect.arrayContaining([
@@ -80,7 +80,7 @@ describe('part inventory', () => {
           component: expect.objectContaining({
             name: expect.stringMatching(partComponent.name),
           }),
-          required_quantity: requiredComponentQuantity,
+          requiredQuantity: requiredComponentQuantity,
         }),
       ]),
     );
@@ -120,18 +120,18 @@ describe('part inventory', () => {
     });
 
     await partAssignmentsService.assignComponent({
-      required_quantity: requiredComponentsQuantity,
-      parent_id: partParent.part_id,
-      component_id: partComponent1.part_id,
+      requiredQuantity: requiredComponentsQuantity,
+      parentId: partParent.part_id,
+      componentId: partComponent1.part_id,
     });
 
     await partAssignmentsService.assignComponent({
-      required_quantity: requiredComponentsQuantity,
-      parent_id: partParent.part_id,
-      component_id: partComponent2.part_id,
+      requiredQuantity: requiredComponentsQuantity,
+      parentId: partParent.part_id,
+      componentId: partComponent2.part_id,
     });
 
-    const components = await partsService.getComponents(partParent);
+    const components = await partsService.getComponentAssignments(partParent);
 
     expect(components).toEqual(
       expect.arrayContaining([
@@ -139,13 +139,13 @@ describe('part inventory', () => {
           component: expect.objectContaining({
             name: expect.stringMatching(partComponent1.name),
           }),
-          required_quantity: requiredComponentsQuantity,
+          requiredQuantity: requiredComponentsQuantity,
         }),
         expect.objectContaining({
           component: expect.objectContaining({
             name: expect.stringMatching(partComponent2.name),
           }),
-          required_quantity: requiredComponentsQuantity,
+          requiredQuantity: requiredComponentsQuantity,
         }),
       ]),
     );

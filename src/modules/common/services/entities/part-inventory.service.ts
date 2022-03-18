@@ -21,7 +21,7 @@ export class PartInventoryService {
 
     const partComponents = await this.prisma.partAssignment.findMany({
       where: {
-        parent_id: craftInput.part_id,
+        parentId: craftInput.part_id,
       },
     });
 
@@ -35,12 +35,12 @@ export class PartInventoryService {
 
     for (const component of partComponents) {
       const componentCurrentQuantity = await this.getCurrentQuantity(
-        component.component_id,
+        component.componentId,
       );
 
       if (
         componentCurrentQuantity <
-        component.required_quantity * craftInput.quantity
+        component.requiredQuantity * craftInput.quantity
       ) {
         throw new BadRequestException('Not enough component parts to craft');
       }
@@ -49,8 +49,8 @@ export class PartInventoryService {
     for (const component of partComponents) {
       await this.prisma.partSubtraction.create({
         data: {
-          part_id: component.component_id,
-          quantity: craftInput.quantity * component.required_quantity,
+          part_id: component.componentId,
+          quantity: craftInput.quantity * component.requiredQuantity,
         },
       });
     }
@@ -79,7 +79,7 @@ export class PartInventoryService {
         name: true,
         _count: {
           select: {
-            parent_assignments: true,
+            parentAssignments: true,
           },
         },
       },
@@ -88,7 +88,7 @@ export class PartInventoryService {
       },
     });
 
-    if (part._count.parent_assignments !== 0) {
+    if (part._count.parentAssignments !== 0) {
       throw new BadRequestException('Part cannot be added, it must be crafted');
     }
 

@@ -25,11 +25,20 @@ export class Part extends PartBase {
   part_id: number;
 }
 
-@ObjectType('Component')
-export class Component {
+@ObjectType('ComponentAssignment')
+export class ComponentAssignment {
   @Field({ nullable: false })
   component: Part;
 
   @Field({ nullable: false })
-  required_quantity: number;
+  requiredQuantity: number;
+}
+
+@ObjectType('ParentAssignment')
+export class ParentAssignment {
+  @Field({ nullable: false })
+  parent: Part;
+
+  @Field({ nullable: false })
+  requiredQuantity: number;
 }

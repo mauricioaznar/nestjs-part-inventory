@@ -26,74 +26,74 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // bleach
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.bleach.part_id,
-      component_id: rawMaterials.saltDeposit.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.bleach.part_id,
+      componentId: rawMaterials.saltDeposit.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.bleach.part_id,
-      component_id: rawMaterials.coralTubeSample.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.bleach.part_id,
+      componentId: rawMaterials.coralTubeSample.part_id,
+      requiredQuantity: 1,
     });
 
     // enameled glass
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.enameledGlass.part_id,
-      component_id: rawMaterials.stalkerTeeth.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.enameledGlass.part_id,
+      componentId: rawMaterials.stalkerTeeth.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.enameledGlass.part_id,
-      component_id: basicMaterials.glass.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.enameledGlass.part_id,
+      componentId: basicMaterials.glass.part_id,
+      requiredQuantity: 1,
     });
 
     // fiber mesh
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.fiberMesh.part_id,
-      component_id: rawMaterials.creepvineSample.part_id,
-      required_quantity: 2,
+      parentId: basicMaterials.fiberMesh.part_id,
+      componentId: rawMaterials.creepvineSample.part_id,
+      requiredQuantity: 2,
     });
 
     // glass
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.glass.part_id,
-      component_id: rawMaterials.quartz.part_id,
-      required_quantity: 2,
+      parentId: basicMaterials.glass.part_id,
+      componentId: rawMaterials.quartz.part_id,
+      requiredQuantity: 2,
     });
 
     // lubricant
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.lubricant.part_id,
-      component_id: rawMaterials.creepvineSeedCluster.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.lubricant.part_id,
+      componentId: rawMaterials.creepvineSeedCluster.part_id,
+      requiredQuantity: 1,
     });
 
     // plasteel ingot
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.plasteelIngot.part_id,
-      component_id: basicMaterials.titaniumIngot.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.plasteelIngot.part_id,
+      componentId: basicMaterials.titaniumIngot.part_id,
+      requiredQuantity: 1,
     });
 
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.plasteelIngot.part_id,
-      component_id: rawMaterials.lithium.part_id,
-      required_quantity: 2,
+      parentId: basicMaterials.plasteelIngot.part_id,
+      componentId: rawMaterials.lithium.part_id,
+      requiredQuantity: 2,
     });
 
     // silicon rubber
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.siliconeRubber.part_id,
-      component_id: rawMaterials.creepvineSeedCluster.part_id,
-      required_quantity: 1,
+      parentId: basicMaterials.siliconeRubber.part_id,
+      componentId: rawMaterials.creepvineSeedCluster.part_id,
+      requiredQuantity: 1,
     });
 
     // titanium ingot
     await this.partAssignmentService.assignComponent({
-      parent_id: basicMaterials.titaniumIngot.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 10,
+      parentId: basicMaterials.titaniumIngot.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 10,
     });
   }
 
@@ -104,69 +104,69 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // aerogel
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.aerogel.part_id,
-      component_id: rawMaterials.gelSack.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.aerogel.part_id,
+      componentId: rawMaterials.gelSack.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.aerogel.part_id,
-      component_id: rawMaterials.ruby.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.aerogel.part_id,
+      componentId: rawMaterials.ruby.part_id,
+      requiredQuantity: 1,
     });
 
     // benzene
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.benzene.part_id,
-      component_id: rawMaterials.bloodOil.part_id,
-      required_quantity: 3,
+      parentId: advancedMaterials.benzene.part_id,
+      componentId: rawMaterials.bloodOil.part_id,
+      requiredQuantity: 3,
     });
 
     // hydraulic fluid
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.hydraulicFluid.part_id,
-      component_id: rawMaterials.creepvineSeedCluster.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.hydraulicFluid.part_id,
+      componentId: rawMaterials.creepvineSeedCluster.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.hydraulicFluid.part_id,
-      component_id: rawMaterials.gelSack.part_id,
-      required_quantity: 4,
+      parentId: advancedMaterials.hydraulicFluid.part_id,
+      componentId: rawMaterials.gelSack.part_id,
+      requiredQuantity: 4,
     });
 
     // hydrochloric acid
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.hydrochloricAcid.part_id,
-      component_id: rawMaterials.deepShroom.part_id,
-      required_quantity: 3,
+      parentId: advancedMaterials.hydrochloricAcid.part_id,
+      componentId: rawMaterials.deepShroom.part_id,
+      requiredQuantity: 3,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.hydrochloricAcid.part_id,
-      component_id: rawMaterials.saltDeposit.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.hydrochloricAcid.part_id,
+      componentId: rawMaterials.saltDeposit.part_id,
+      requiredQuantity: 1,
     });
 
     // polyaniline
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.polyaniline.part_id,
-      component_id: advancedMaterials.hydrochloricAcid.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.polyaniline.part_id,
+      componentId: advancedMaterials.hydrochloricAcid.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.polyaniline.part_id,
-      component_id: rawMaterials.gold.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.polyaniline.part_id,
+      componentId: rawMaterials.gold.part_id,
+      requiredQuantity: 1,
     });
 
     // synthetic fibers
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.syntheticFibers.part_id,
-      component_id: advancedMaterials.benzene.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.syntheticFibers.part_id,
+      componentId: advancedMaterials.benzene.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: advancedMaterials.syntheticFibers.part_id,
-      component_id: basicMaterials.fiberMesh.part_id,
-      required_quantity: 1,
+      parentId: advancedMaterials.syntheticFibers.part_id,
+      componentId: basicMaterials.fiberMesh.part_id,
+      requiredQuantity: 1,
     });
   }
 
@@ -177,91 +177,91 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // advanced wiring kit
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.advancedWiringKit.part_id,
-      component_id: electronics.wiringKit.part_id,
-      required_quantity: 1,
+      parentId: electronics.advancedWiringKit.part_id,
+      componentId: electronics.wiringKit.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.advancedWiringKit.part_id,
-      component_id: rawMaterials.gold.part_id,
-      required_quantity: 2,
+      parentId: electronics.advancedWiringKit.part_id,
+      componentId: rawMaterials.gold.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.advancedWiringKit.part_id,
-      component_id: electronics.computerChip.part_id,
-      required_quantity: 1,
+      parentId: electronics.advancedWiringKit.part_id,
+      componentId: electronics.computerChip.part_id,
+      requiredQuantity: 1,
     });
 
     // battery
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.battery.part_id,
-      component_id: rawMaterials.acidShroom.part_id,
-      required_quantity: 2,
+      parentId: electronics.battery.part_id,
+      componentId: rawMaterials.acidShroom.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.battery.part_id,
-      component_id: rawMaterials.copperOre.part_id,
-      required_quantity: 1,
+      parentId: electronics.battery.part_id,
+      componentId: rawMaterials.copperOre.part_id,
+      requiredQuantity: 1,
     });
 
     // computer chip
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.computerChip.part_id,
-      component_id: rawMaterials.tableCoralSample.part_id,
-      required_quantity: 2,
+      parentId: electronics.computerChip.part_id,
+      componentId: rawMaterials.tableCoralSample.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.computerChip.part_id,
-      component_id: rawMaterials.gold.part_id,
-      required_quantity: 1,
+      parentId: electronics.computerChip.part_id,
+      componentId: rawMaterials.gold.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.computerChip.part_id,
-      component_id: electronics.copperWire.part_id,
-      required_quantity: 1,
+      parentId: electronics.computerChip.part_id,
+      componentId: electronics.copperWire.part_id,
+      requiredQuantity: 1,
     });
 
     // copper wire
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.copperWire.part_id,
-      component_id: rawMaterials.copperOre.part_id,
-      required_quantity: 2,
+      parentId: electronics.copperWire.part_id,
+      componentId: rawMaterials.copperOre.part_id,
+      requiredQuantity: 2,
     });
 
     // ion battery
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.ionBattery.part_id,
-      component_id: rawMaterials.ionCube.part_id,
-      required_quantity: 1,
+      parentId: electronics.ionBattery.part_id,
+      componentId: rawMaterials.ionCube.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.ionBattery.part_id,
-      component_id: rawMaterials.gold.part_id,
-      required_quantity: 1,
+      parentId: electronics.ionBattery.part_id,
+      componentId: rawMaterials.gold.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.ionBattery.part_id,
-      component_id: rawMaterials.silverOre.part_id,
-      required_quantity: 1,
+      parentId: electronics.ionBattery.part_id,
+      componentId: rawMaterials.silverOre.part_id,
+      requiredQuantity: 1,
     });
 
     // power cell
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.powerCell.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 2,
+      parentId: electronics.powerCell.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.powerCell.part_id,
-      component_id: basicMaterials.siliconeRubber.part_id,
-      required_quantity: 1,
+      parentId: electronics.powerCell.part_id,
+      componentId: basicMaterials.siliconeRubber.part_id,
+      requiredQuantity: 1,
     });
 
     // wiring kit
     await this.partAssignmentService.assignComponent({
-      parent_id: electronics.wiringKit.part_id,
-      component_id: rawMaterials.silverOre.part_id,
-      required_quantity: 2,
+      parentId: electronics.wiringKit.part_id,
+      componentId: rawMaterials.silverOre.part_id,
+      requiredQuantity: 2,
     });
   }
 
@@ -273,77 +273,77 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // beacon
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.beacon.part_id,
-      component_id: rawMaterials.copperOre.part_id,
-      required_quantity: 1,
+      parentId: deployables.beacon.part_id,
+      componentId: rawMaterials.copperOre.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.beacon.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: deployables.beacon.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // grav trap
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.gravTrap.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: deployables.gravTrap.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.gravTrap.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: deployables.gravTrap.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.gravTrap.part_id,
-      component_id: rawMaterials.copperOre.part_id,
-      required_quantity: 1,
+      parentId: deployables.gravTrap.part_id,
+      componentId: rawMaterials.copperOre.part_id,
+      requiredQuantity: 1,
     });
 
     // mobile vehicle bay
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.mobileVehicleBay.part_id,
-      component_id: basicMaterials.titaniumIngot.part_id,
-      required_quantity: 1,
+      parentId: deployables.mobileVehicleBay.part_id,
+      componentId: basicMaterials.titaniumIngot.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.mobileVehicleBay.part_id,
-      component_id: basicMaterials.lubricant.part_id,
-      required_quantity: 1,
+      parentId: deployables.mobileVehicleBay.part_id,
+      componentId: basicMaterials.lubricant.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.mobileVehicleBay.part_id,
-      component_id: electronics.powerCell.part_id,
-      required_quantity: 1,
+      parentId: deployables.mobileVehicleBay.part_id,
+      componentId: electronics.powerCell.part_id,
+      requiredQuantity: 1,
     });
 
     // seaglide
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.seaglide.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: deployables.seaglide.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.seaglide.part_id,
-      component_id: basicMaterials.lubricant.part_id,
-      required_quantity: 1,
+      parentId: deployables.seaglide.part_id,
+      componentId: basicMaterials.lubricant.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.seaglide.part_id,
-      component_id: electronics.copperWire.part_id,
-      required_quantity: 1,
+      parentId: deployables.seaglide.part_id,
+      componentId: electronics.copperWire.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.seaglide.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: deployables.seaglide.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // waterproof locker
     await this.partAssignmentService.assignComponent({
-      parent_id: deployables.waterproofLocker.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 4,
+      parentId: deployables.waterproofLocker.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 4,
     });
   }
 
@@ -355,129 +355,129 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // compass
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.compass.part_id,
-      component_id: electronics.copperWire.part_id,
-      required_quantity: 1,
+      parentId: equipments.compass.part_id,
+      componentId: electronics.copperWire.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.compass.part_id,
-      component_id: electronics.wiringKit.part_id,
-      required_quantity: 1,
+      parentId: equipments.compass.part_id,
+      componentId: electronics.wiringKit.part_id,
+      requiredQuantity: 1,
     });
 
     // fins
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.fins.part_id,
-      component_id: basicMaterials.siliconeRubber.part_id,
-      required_quantity: 2,
+      parentId: equipments.fins.part_id,
+      componentId: basicMaterials.siliconeRubber.part_id,
+      requiredQuantity: 2,
     });
 
     // fire extinguisher
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.fireExtinguisher.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 3,
+      parentId: equipments.fireExtinguisher.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 3,
     });
 
     // first aid
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.firstAidKit.part_id,
-      component_id: basicMaterials.fiberMesh.part_id,
-      required_quantity: 1,
+      parentId: equipments.firstAidKit.part_id,
+      componentId: basicMaterials.fiberMesh.part_id,
+      requiredQuantity: 1,
     });
 
     // head lamp
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.headlamp.part_id,
-      component_id: electronics.ionBattery.part_id,
-      required_quantity: 1,
+      parentId: equipments.headlamp.part_id,
+      componentId: electronics.ionBattery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.headlamp.part_id,
-      component_id: basicMaterials.glass.part_id,
-      required_quantity: 1,
+      parentId: equipments.headlamp.part_id,
+      componentId: basicMaterials.glass.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.headlamp.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: equipments.headlamp.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // high capacity tank
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.highCapacityO2Tank.part_id,
-      component_id: equipments.standardO2Tank.part_id,
-      required_quantity: 1,
+      parentId: equipments.highCapacityO2Tank.part_id,
+      componentId: equipments.standardO2Tank.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.highCapacityO2Tank.part_id,
-      component_id: basicMaterials.glass.part_id,
-      required_quantity: 2,
+      parentId: equipments.highCapacityO2Tank.part_id,
+      componentId: basicMaterials.glass.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.highCapacityO2Tank.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 4,
+      parentId: equipments.highCapacityO2Tank.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 4,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.highCapacityO2Tank.part_id,
-      component_id: rawMaterials.silverOre.part_id,
-      required_quantity: 1,
+      parentId: equipments.highCapacityO2Tank.part_id,
+      componentId: rawMaterials.silverOre.part_id,
+      requiredQuantity: 1,
     });
 
     // lightweight high capacity tank
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.lightweightHighCapacityTank.part_id,
-      component_id: equipments.highCapacityO2Tank.part_id,
-      required_quantity: 1,
+      parentId: equipments.lightweightHighCapacityTank.part_id,
+      componentId: equipments.highCapacityO2Tank.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.lightweightHighCapacityTank.part_id,
-      component_id: basicMaterials.plasteelIngot.part_id,
-      required_quantity: 1,
+      parentId: equipments.lightweightHighCapacityTank.part_id,
+      componentId: basicMaterials.plasteelIngot.part_id,
+      requiredQuantity: 1,
     });
 
     // radiation suit
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.radiationSuit.part_id,
-      component_id: basicMaterials.fiberMesh.part_id,
-      required_quantity: 2,
+      parentId: equipments.radiationSuit.part_id,
+      componentId: basicMaterials.fiberMesh.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.radiationSuit.part_id,
-      component_id: rawMaterials.lead.part_id,
-      required_quantity: 2,
+      parentId: equipments.radiationSuit.part_id,
+      componentId: rawMaterials.lead.part_id,
+      requiredQuantity: 2,
     });
 
     // rebreather
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.rebreather.part_id,
-      component_id: basicMaterials.fiberMesh.part_id,
-      required_quantity: 1,
+      parentId: equipments.rebreather.part_id,
+      componentId: basicMaterials.fiberMesh.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.rebreather.part_id,
-      component_id: electronics.wiringKit.part_id,
-      required_quantity: 1,
+      parentId: equipments.rebreather.part_id,
+      componentId: electronics.wiringKit.part_id,
+      requiredQuantity: 1,
     });
 
     // standard tank
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.standardO2Tank.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 3,
+      parentId: equipments.standardO2Tank.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 3,
     });
 
     // ultra high capacity tank
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.ultraHighCapacityTank.part_id,
-      component_id: equipments.highCapacityO2Tank.part_id,
-      required_quantity: 1,
+      parentId: equipments.ultraHighCapacityTank.part_id,
+      componentId: equipments.highCapacityO2Tank.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: equipments.ultraHighCapacityTank.part_id,
-      component_id: rawMaterials.lithium.part_id,
-      required_quantity: 4,
+      parentId: equipments.ultraHighCapacityTank.part_id,
+      componentId: rawMaterials.lithium.part_id,
+      requiredQuantity: 4,
     });
   }
 
@@ -489,176 +489,176 @@ export class PartAssignmentCreationService {
   }: AllPartsSeed): Promise<void> {
     // air bladder
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.airBladder.part_id,
-      component_id: rawMaterials.bladderfish.part_id,
-      required_quantity: 1,
+      parentId: tools.airBladder.part_id,
+      componentId: rawMaterials.bladderfish.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.airBladder.part_id,
-      component_id: basicMaterials.siliconeRubber.part_id,
-      required_quantity: 1,
+      parentId: tools.airBladder.part_id,
+      componentId: basicMaterials.siliconeRubber.part_id,
+      requiredQuantity: 1,
     });
 
     // flare
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.flare.part_id,
-      component_id: rawMaterials.caveSulfur.part_id,
-      required_quantity: 1,
+      parentId: tools.flare.part_id,
+      componentId: rawMaterials.caveSulfur.part_id,
+      requiredQuantity: 1,
     });
 
     // flashlight
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.flashlight.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.flashlight.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.flashlight.part_id,
-      component_id: basicMaterials.glass.part_id,
-      required_quantity: 1,
+      parentId: tools.flashlight.part_id,
+      componentId: basicMaterials.glass.part_id,
+      requiredQuantity: 1,
     });
 
     // habitat builder
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.habitatBuilder.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.habitatBuilder.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.habitatBuilder.part_id,
-      component_id: electronics.computerChip.part_id,
-      required_quantity: 1,
+      parentId: tools.habitatBuilder.part_id,
+      componentId: electronics.computerChip.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.habitatBuilder.part_id,
-      component_id: electronics.wiringKit.part_id,
-      required_quantity: 1,
+      parentId: tools.habitatBuilder.part_id,
+      componentId: electronics.wiringKit.part_id,
+      requiredQuantity: 1,
     });
 
     // laser cutter
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.laserCutter.part_id,
-      component_id: rawMaterials.diamond.part_id,
-      required_quantity: 2,
+      parentId: tools.laserCutter.part_id,
+      componentId: rawMaterials.diamond.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.laserCutter.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.laserCutter.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.laserCutter.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.laserCutter.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.laserCutter.part_id,
-      component_id: rawMaterials.caveSulfur.part_id,
-      required_quantity: 1,
+      parentId: tools.laserCutter.part_id,
+      componentId: rawMaterials.caveSulfur.part_id,
+      requiredQuantity: 1,
     });
 
     // light stick
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.lightStick.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.lightStick.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.lightStick.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.lightStick.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.lightStick.part_id,
-      component_id: basicMaterials.glass.part_id,
-      required_quantity: 1,
+      parentId: tools.lightStick.part_id,
+      componentId: basicMaterials.glass.part_id,
+      requiredQuantity: 1,
     });
 
     // pathfinder tool
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.pathfinderTool.part_id,
-      component_id: rawMaterials.creepvineSeedCluster.part_id,
-      required_quantity: 2,
+      parentId: tools.pathfinderTool.part_id,
+      componentId: rawMaterials.creepvineSeedCluster.part_id,
+      requiredQuantity: 2,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.pathfinderTool.part_id,
-      component_id: electronics.copperWire.part_id,
-      required_quantity: 1,
+      parentId: tools.pathfinderTool.part_id,
+      componentId: electronics.copperWire.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.pathfinderTool.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.pathfinderTool.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // propulsion cannon
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.propulsionCannon.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.propulsionCannon.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.propulsionCannon.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.propulsionCannon.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.propulsionCannon.part_id,
-      component_id: electronics.wiringKit.part_id,
-      required_quantity: 1,
+      parentId: tools.propulsionCannon.part_id,
+      componentId: electronics.wiringKit.part_id,
+      requiredQuantity: 1,
     });
 
     // repair tool
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.repairTool.part_id,
-      component_id: rawMaterials.caveSulfur.part_id,
-      required_quantity: 1,
+      parentId: tools.repairTool.part_id,
+      componentId: rawMaterials.caveSulfur.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.repairTool.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.repairTool.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.repairTool.part_id,
-      component_id: basicMaterials.siliconeRubber.part_id,
-      required_quantity: 1,
+      parentId: tools.repairTool.part_id,
+      componentId: basicMaterials.siliconeRubber.part_id,
+      requiredQuantity: 1,
     });
 
     // scanner
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.scanner.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.scanner.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.scanner.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.scanner.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // survival knife
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.survivalKnife.part_id,
-      component_id: basicMaterials.siliconeRubber.part_id,
-      required_quantity: 1,
+      parentId: tools.survivalKnife.part_id,
+      componentId: basicMaterials.siliconeRubber.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.survivalKnife.part_id,
-      component_id: rawMaterials.titanium.part_id,
-      required_quantity: 1,
+      parentId: tools.survivalKnife.part_id,
+      componentId: rawMaterials.titanium.part_id,
+      requiredQuantity: 1,
     });
 
     // thermoblade
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.thermoblade.part_id,
-      component_id: tools.survivalKnife.part_id,
-      required_quantity: 1,
+      parentId: tools.thermoblade.part_id,
+      componentId: tools.survivalKnife.part_id,
+      requiredQuantity: 1,
     });
     await this.partAssignmentService.assignComponent({
-      parent_id: tools.thermoblade.part_id,
-      component_id: electronics.battery.part_id,
-      required_quantity: 1,
+      parentId: tools.thermoblade.part_id,
+      componentId: electronics.battery.part_id,
+      requiredQuantity: 1,
     });
   }
 }

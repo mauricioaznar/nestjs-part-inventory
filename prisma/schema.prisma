@@ -23,27 +23,27 @@ model Part {
   image_url             String?
   part_category_id      Int
   default_generated_quantity    Int               @default(1)
-  part_category         PartCategory      @relation("categories", fields: [part_category_id], references: [part_category_id])
-  parent_assignments    PartAssignment[]  @relation("parent_assignments")
-  component_assignments PartAssignment[]  @relation("component_assignments")
+  partCategory         PartCategory      @relation("partCategory", fields: [part_category_id], references: [part_category_id])
+  parentAssignments    PartAssignment[]  @relation("parentAssignments")
+  componentAssignments PartAssignment[]  @relation("componentAssignments")
   additions             PartAddition[]    @relation("additions")
   subtractions          PartSubtraction[] @relation("subtractions")
 }
 
 model PartCategory {
   part_category_id Int    @id @default(autoincrement())
-  parts            Part[] @relation("categories")
+  parts            Part[] @relation("partCategory")
   name             String @db.Text
 }
 
 model PartAssignment {
-  parent            Part @relation("parent_assignments", fields: [parent_id], references: [part_id])
-  parent_id         Int
-  component         Part @relation("component_assignments", fields: [component_id], references: [part_id])
-  component_id      Int
-  required_quantity Int
+  parent            Part @relation("parentAssignments", fields: [parentId], references: [part_id])
+  parentId         Int
+  component         Part @relation("componentAssignments", fields: [componentId], references: [part_id])
+  componentId      Int
+  requiredQuantity Int
 
-  @@id([parent_id, component_id])
+  @@id([parentId, componentId])
 }
 
 model PartAddition {

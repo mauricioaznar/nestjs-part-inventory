@@ -47,14 +47,26 @@ export class PartsService {
     return this.prisma.part.findMany();
   }
 
-  async getComponents(part: Part) {
+  async getComponentAssignments(part: Part) {
     return await this.prisma.partAssignment.findMany({
       select: {
         component: true,
-        required_quantity: true,
+        requiredQuantity: true,
       },
       where: {
-        parent_id: part.part_id,
+        parentId: part.part_id,
+      },
+    });
+  }
+
+  async getParentAssignments(part: Part) {
+    return await this.prisma.partAssignment.findMany({
+      select: {
+        parent: true,
+        requiredQuantity: true,
+      },
+      where: {
+        componentId: part.part_id,
       },
     });
   }

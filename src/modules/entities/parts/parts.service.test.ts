@@ -149,19 +149,19 @@ describe('part service', () => {
 
     const partComponent1RequiredQuantity = 1;
     await partAssignmentsService.assignComponent({
-      required_quantity: 1,
-      parent_id: partParent.part_id,
-      component_id: partComponent1.part_id,
+      requiredQuantity: 1,
+      parentId: partParent.part_id,
+      componentId: partComponent1.part_id,
     });
 
     const partComponent2RequiredQuantity = 3;
     await partAssignmentsService.assignComponent({
-      required_quantity: partComponent2RequiredQuantity,
-      parent_id: partParent.part_id,
-      component_id: partComponent2.part_id,
+      requiredQuantity: partComponent2RequiredQuantity,
+      parentId: partParent.part_id,
+      componentId: partComponent2.part_id,
     });
 
-    const components = await partsService.getComponents(partParent);
+    const components = await partsService.getComponentAssignments(partParent);
 
     expect(components).toEqual(
       expect.arrayContaining([
@@ -169,13 +169,66 @@ describe('part service', () => {
           component: expect.objectContaining({
             name: expect.stringMatching(partComponent1.name),
           }),
-          required_quantity: partComponent1RequiredQuantity,
+          requiredQuantity: partComponent1RequiredQuantity,
         }),
         expect.objectContaining({
           component: expect.objectContaining({
             name: expect.stringMatching(partComponent2.name),
           }),
-          required_quantity: partComponent2RequiredQuantity,
+          requiredQuantity: partComponent2RequiredQuantity,
+        }),
+      ]),
+    );
+  });
+
+  it('get part parents', async () => {
+    const partComponent = await partsService.createPart({
+      name: 'get part parents component name 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partParent1 = await partsService.createPart({
+      name: 'get part parents parent name 1',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partParent2 = await partsService.createPart({
+      name: 'get part parents parent name 2',
+      image_url: null,
+      part_category_id: partCategory.part_category_id,
+    });
+
+    const partComponent1RequiredQuantity = 1;
+    await partAssignmentsService.assignComponent({
+      requiredQuantity: 1,
+      parentId: partParent1.part_id,
+      componentId: partComponent.part_id,
+    });
+
+    const partComponent2RequiredQuantity = 3;
+    await partAssignmentsService.assignComponent({
+      requiredQuantity: partComponent2RequiredQuantity,
+      parentId: partParent2.part_id,
+      componentId: partComponent.part_id,
+    });
+
+    const parents = await partsService.getParentAssignments(partComponent);
+
+    expect(parents).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          parent: expect.objectContaining({
+            name: expect.stringMatching(partParent1.name),
+          }),
+          requiredQuantity: partComponent1RequiredQuantity,
+        }),
+        expect.objectContaining({
+          parent: expect.objectContaining({
+            name: expect.stringMatching(partParent2.name),
+          }),
+          requiredQuantity: partComponent2RequiredQuantity,
         }),
       ]),
     );

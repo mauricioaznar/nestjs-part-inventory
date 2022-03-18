@@ -4,13 +4,13 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 @InputType({ isAbstract: true })
 export class PartAssignmentBase {
   @Field({ nullable: false })
-  parent_id: number;
+  parentId: number;
 
   @Field({ nullable: false })
-  component_id: number;
+  componentId: number;
 
   @Field({ nullable: false })
-  required_quantity: number;
+  requiredQuantity: number;
 }
 
 @InputType('PartAssignmentInput')

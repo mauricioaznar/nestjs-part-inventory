@@ -9,7 +9,8 @@ import {
 import { Injectable, UseGuards } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import {
-  Component,
+  ComponentAssignment,
+  ParentAssignment,
   Part,
   PartInput,
 } from '../../common/dto/entities/parts.dto';
@@ -62,16 +63,21 @@ export class PartsResolver {
     return true;
   }
 
-  @Mutation(() => Component)
+  @Mutation(() => ComponentAssignment)
   async assignComponent(
     @Args('PartAssignmentInput') input: PartAssignmentInput,
-  ): Promise<Component> {
+  ): Promise<ComponentAssignment> {
     return this.partAssignmentService.assignComponent(input);
   }
 
-  @ResolveField(() => [Component])
-  async components(part: Part) {
-    return this.partsService.getComponents(part);
+  @ResolveField(() => [ComponentAssignment])
+  async componentAssignments(part: Part) {
+    return this.partsService.getComponentAssignments(part);
+  }
+
+  @ResolveField(() => [ParentAssignment])
+  async parentAssignments(part: Part) {
+    return this.partsService.getParentAssignments(part);
   }
 
   @ResolveField(() => Int)

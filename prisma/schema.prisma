@@ -17,29 +17,29 @@ model User {
 }
 
 model Part {
-  partId               Int               @id @default(autoincrement())
-  name                  String            @db.Text
-  comment               String?           @db.Text
-  imageUrl             String?
-  partCategoryId      Int
-  defaultGeneratedQuantity    Int               @default(1)
-  partCategory         PartCategory      @relation("partCategory", fields: [partCategoryId], references: [partCategoryId])
-  parentAssignments    PartAssignment[]  @relation("parentAssignments")
-  componentAssignments PartAssignment[]  @relation("componentAssignments")
-  additions             PartAddition[]    @relation("additions")
-  subtractions          PartSubtraction[] @relation("subtractions")
+  partId                   Int               @id @default(autoincrement())
+  name                     String            @db.Text
+  comment                  String?           @db.Text
+  imageUrl                 String?
+  partCategoryId           Int
+  defaultGeneratedQuantity Int               @default(1)
+  partCategory             PartCategory      @relation("partCategory", fields: [partCategoryId], references: [partCategoryId])
+  parentAssignments        PartAssignment[]  @relation("parentAssignments")
+  componentAssignments     PartAssignment[]  @relation("componentAssignments")
+  additions                PartAddition[]    @relation("additions")
+  subtractions             PartSubtraction[] @relation("subtractions")
 }
 
 model PartCategory {
   partCategoryId Int    @id @default(autoincrement())
-  parts            Part[] @relation("partCategory")
-  name             String @db.Text
+  parts          Part[] @relation("partCategory")
+  name           String @db.Text
 }
 
 model PartAssignment {
-  parent            Part @relation("parentAssignments", fields: [parentId], references: [partId])
+  parent           Part @relation("parentAssignments", fields: [parentId], references: [partId])
   parentId         Int
-  component         Part @relation("componentAssignments", fields: [componentId], references: [partId])
+  component        Part @relation("componentAssignments", fields: [componentId], references: [partId])
   componentId      Int
   requiredQuantity Int
 
@@ -48,14 +48,14 @@ model PartAssignment {
 
 model PartAddition {
   id       Int  @id @default(autoincrement())
-  partId  Int
+  partId   Int
   part     Part @relation("additions", fields: [partId], references: [partId])
   quantity Int
 }
 
 model PartSubtraction {
   id       Int  @id @default(autoincrement())
-  partId  Int
+  partId   Int
   part     Part @relation("subtractions", fields: [partId], references: [partId])
   quantity Int
 }

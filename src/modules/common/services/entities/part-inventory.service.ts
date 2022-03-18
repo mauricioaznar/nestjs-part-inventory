@@ -1,15 +1,30 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  CACHE_MANAGER,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CraftInput, FarmInput } from '../../dto/entities/part-inventory.dto';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class PartInventoryService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
 
   async getCurrentQuantity(partId: number): Promise<number> {
+    const cachedCurrentQuantity = await this.getCurrentQuantityCachedValue({
+      partId,
+    });
+    if (cachedCurrentQuantity !== null) return cachedCurrentQuantity;
     const additionsTotal = await this.getAdditionsTotal(partId);
     const subtractionsTotal = await this.getSubtractionTotal(partId);
-    return additionsTotal - subtractionsTotal;
+    const currentQuantity = additionsTotal - subtractionsTotal;
+    await this.setCurrentQuantityCachedValue({ partId, currentQuantity });
+    return currentQuantity;
   }
 
   async craft(craftInput: CraftInput): Promise<void> {
@@ -53,6 +68,9 @@ export class PartInventoryService {
           quantity: craftInput.quantity * component.requiredQuantity,
         },
       });
+      await this.deleteCurrentQuantityCachedValue({
+        partId: component.componentId,
+      });
     }
 
     const parent = await this.prisma.part.findFirst({
@@ -67,6 +85,7 @@ export class PartInventoryService {
         quantity: craftInput.quantity * parent.defaultGeneratedQuantity,
       },
     });
+    await this.deleteCurrentQuantityCachedValue({ partId: craftInput.partId });
   }
 
   async add(farmInput: FarmInput): Promise<void> {
@@ -102,6 +121,7 @@ export class PartInventoryService {
         quantity: farmInput.quantity,
       },
     });
+    await this.deleteCurrentQuantityCachedValue({ partId: farmInput.partId });
   }
 
   private async doesPartExist(partId: number): Promise<boolean> {
@@ -134,5 +154,33 @@ export class PartInventoryService {
       },
     });
     return quantity || 0;
+  }
+
+  private async deleteCurrentQuantityCachedValue({
+    partId,
+  }: {
+    partId: number;
+  }) {
+    await this.cacheManager.del(`partId_${partId}`);
+  }
+
+  private async setCurrentQuantityCachedValue({
+    partId,
+    currentQuantity,
+  }: {
+    partId: number;
+    currentQuantity: number;
+  }) {
+    await this.cacheManager.set(`partId_${partId}`, currentQuantity);
+  }
+
+  private async getCurrentQuantityCachedValue({
+    partId,
+  }: {
+    partId: number;
+  }): Promise<number | null> {
+    const currentQuantity = await this.cacheManager.get(`partId_${partId}`);
+    if (!currentQuantity) return null;
+    return Number(currentQuantity);
   }
 }

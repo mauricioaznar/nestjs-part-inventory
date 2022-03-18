@@ -1,7 +1,13 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  CACHE_MANAGER,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { PartAssignmentInput } from '../../dto/entities/part-assignment.dto';
 import { ComponentAssignment } from '../../dto/entities/parts.dto';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class PartAssignmentsService {

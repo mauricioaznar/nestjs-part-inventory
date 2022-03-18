@@ -64,7 +64,7 @@ export class PartInventoryService {
     await this.prisma.partAddition.create({
       data: {
         part_id: craftInput.part_id,
-        quantity: craftInput.quantity * parent.default_generated_quantity,
+        quantity: craftInput.quantity * parent.defaultGeneratedQuantity,
       },
     });
   }

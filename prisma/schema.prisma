@@ -20,10 +20,10 @@ model Part {
   part_id               Int               @id @default(autoincrement())
   name                  String            @db.Text
   comment               String?           @db.Text
-  image_url             String?
-  part_category_id      Int
-  default_generated_quantity    Int               @default(1)
-  partCategory         PartCategory      @relation("partCategory", fields: [part_category_id], references: [part_category_id])
+  imageUrl             String?
+  partCategoryId      Int
+  defaultGeneratedQuantity    Int               @default(1)
+  partCategory         PartCategory      @relation("partCategory", fields: [partCategoryId], references: [partCategoryId])
   parentAssignments    PartAssignment[]  @relation("parentAssignments")
   componentAssignments PartAssignment[]  @relation("componentAssignments")
   additions             PartAddition[]    @relation("additions")
@@ -31,7 +31,7 @@ model Part {
 }
 
 model PartCategory {
-  part_category_id Int    @id @default(autoincrement())
+  partCategoryId Int    @id @default(autoincrement())
   parts            Part[] @relation("partCategory")
   name             String @db.Text
 }

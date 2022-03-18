@@ -29,8 +29,8 @@ describe('part service', () => {
     const createdPartName = 'created part 2';
     const part = await partsService.createPart({
       name: createdPartName,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     expect(part.name).toBe(createdPartName);
@@ -40,31 +40,31 @@ describe('part service', () => {
     const createdPartName = 'created part 3';
     const part = await partsService.createPart({
       name: createdPartName,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
-    expect(part.default_generated_quantity).toBe(1);
+    expect(part.defaultGeneratedQuantity).toBe(1);
   });
 
   it('creates part with default generated quantity to 2', async () => {
     const createdPartName = 'created part 4';
     const part = await partsService.createPart({
       name: createdPartName,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
-      default_generated_quantity: 2,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
+      defaultGeneratedQuantity: 2,
     });
 
-    expect(part.default_generated_quantity).toBe(2);
+    expect(part.defaultGeneratedQuantity).toBe(2);
   });
 
   it('gets part', async () => {
     const getPartName = 'Part 1';
     const part = await partsService.createPart({
       name: getPartName,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const getPart = await partsService.getPart(part.part_id);
@@ -75,14 +75,14 @@ describe('part service', () => {
   it('updates part name', async () => {
     const part = await partsService.createPart({
       name: 'updated part 3',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const updatedName = 'updated part zxc 1';
     const updatedPart = await partsService.updatePart(part.part_id, {
       name: updatedName,
-      part_category_id: part.part_category_id,
+      partCategoryId: part.partCategoryId,
     });
 
     expect(updatedPart.name).toBe(updatedName);
@@ -94,7 +94,7 @@ describe('part service', () => {
     await expect(async () => {
       await partsService.updatePart(veryBigId, {
         name: 'Part 2 baby',
-        part_category_id: partCategory.part_category_id,
+        partCategoryId: partCategory.partCategoryId,
       });
     }).rejects.toThrow(/not found/i);
   });
@@ -103,15 +103,15 @@ describe('part service', () => {
     const partName1 = 'get parts name 1';
     await partsService.createPart({
       name: partName1,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partName2 = 'get parts name 2';
     await partsService.createPart({
       name: partName2,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const parts = await partsService.getParts();
@@ -131,20 +131,20 @@ describe('part service', () => {
   it('get part components', async () => {
     const partComponent1 = await partsService.createPart({
       name: 'get part components name 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partComponent2 = await partsService.createPart({
       name: 'get part components name 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partParent = await partsService.createPart({
       name: 'get part components parent name 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partComponent1RequiredQuantity = 1;
@@ -184,20 +184,20 @@ describe('part service', () => {
   it('get part parents', async () => {
     const partComponent = await partsService.createPart({
       name: 'get part parents component name 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partParent1 = await partsService.createPart({
       name: 'get part parents parent name 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partParent2 = await partsService.createPart({
       name: 'get part parents parent name 2',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partComponent1RequiredQuantity = 1;

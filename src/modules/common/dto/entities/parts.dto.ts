@@ -7,13 +7,13 @@ export class PartBase {
   name: string;
 
   @Field({ nullable: true })
-  image_url?: string;
+  imageUrl?: string;
 
   @Field({ nullable: false })
-  part_category_id: number;
+  partCategoryId: number;
 
   @Field(() => Int, { nullable: false })
-  default_generated_quantity?: number;
+  defaultGeneratedQuantity?: number;
 }
 
 @InputType('partInput')

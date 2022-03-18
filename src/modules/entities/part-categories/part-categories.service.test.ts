@@ -69,8 +69,8 @@ describe('part category', () => {
 
     await partsService.createPart({
       name: 'part created in part category test',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partsOfCategory = await partCategoriesService.getParts(partCategory);

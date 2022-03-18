@@ -36,8 +36,8 @@ describe('part inventory', () => {
   }): Promise<{ part: Part }> {
     const part = await partsService.createPart({
       name: `part in ${uniqueName}`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
     return {
       part: part,
@@ -55,15 +55,15 @@ describe('part inventory', () => {
   }): Promise<{ parent: Part; component: Part }> {
     const partParent = await partsService.createPart({
       name: `part parent in ${uniqueName}`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
-      default_generated_quantity: defaultGeneratedQuantity,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
+      defaultGeneratedQuantity: defaultGeneratedQuantity,
     });
 
     const partComponent = await partsService.createPart({
       name: `part component ${uniqueName}`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     await partAssignmentsService.assignComponent({
@@ -102,21 +102,21 @@ describe('part inventory', () => {
   }): Promise<{ parent: Part; component1: Part; component2: Part }> {
     const partParent = await partsService.createPart({
       name: `part parent in ${uniqueName}`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
-      default_generated_quantity: defaultGeneratedQuantity,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
+      defaultGeneratedQuantity: defaultGeneratedQuantity,
     });
 
     const partComponent1 = await partsService.createPart({
       name: `part component ${uniqueName} 1`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partComponent2 = await partsService.createPart({
       name: `part component ${uniqueName} 2`,
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     await partAssignmentsService.assignComponent({

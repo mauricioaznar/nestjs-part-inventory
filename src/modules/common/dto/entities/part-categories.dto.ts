@@ -13,5 +13,5 @@ export class PartCategoryInput extends PartCategoriesBase {}
 @ObjectType('PartCategory')
 export class PartCategory extends PartCategoriesBase {
   @Field({ nullable: false })
-  part_category_id: number;
+  partCategoryId: number;
 }

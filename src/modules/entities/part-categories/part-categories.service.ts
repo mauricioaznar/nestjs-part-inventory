@@ -33,7 +33,7 @@ export class PartCategoriesService {
   async getPartCategories(): Promise<PartCategory[]> {
     return this.prisma.partCategory.findMany({
       orderBy: {
-        part_category_id: 'asc',
+        partCategoryId: 'asc',
       },
     });
   }
@@ -41,7 +41,7 @@ export class PartCategoriesService {
   async getParts(partCategory: PartCategory): Promise<Part[]> {
     return this.prisma.part.findMany({
       where: {
-        part_category_id: partCategory.part_category_id,
+        partCategoryId: partCategory.partCategoryId,
       },
       orderBy: {
         name: 'asc',

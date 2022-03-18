@@ -28,14 +28,14 @@ describe('part assignment', () => {
   it('get part assignment components', async () => {
     const partComponent1 = await partsService.createPart({
       name: 'part component in get part assignment 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partParent = await partsService.createPart({
       name: 'part parent in get part assignment 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partComponent1RequiredQuantity = 1;
@@ -62,14 +62,14 @@ describe('part assignment', () => {
   it('fails to assign component when it already has been assigned', async () => {
     const partComponent1 = await partsService.createPart({
       name: 'part component in has already been assigned 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     const partParent = await partsService.createPart({
       name: 'part component in has already been assigned 2',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     await partAssignmentsService.assignComponent({
@@ -90,15 +90,15 @@ describe('part assignment', () => {
   it('fails to assign component when parent has already 4 components assigned', async () => {
     const partParent = await partsService.createPart({
       name: 'part parent in max component 1',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     for (const number in Array.from(Array(4))) {
       const partComponent = await partsService.createPart({
         name: `part component in max component ${number + 1}`,
-        image_url: null,
-        part_category_id: partCategory.part_category_id,
+        imageUrl: null,
+        partCategoryId: partCategory.partCategoryId,
       });
 
       await partAssignmentsService.assignComponent({
@@ -110,8 +110,8 @@ describe('part assignment', () => {
 
     const partComponent5 = await partsService.createPart({
       name: 'part component in max component 5',
-      image_url: null,
-      part_category_id: partCategory.part_category_id,
+      imageUrl: null,
+      partCategoryId: partCategory.partCategoryId,
     });
 
     await expect(async () => {

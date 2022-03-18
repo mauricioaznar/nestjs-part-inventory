@@ -9,10 +9,10 @@ export class PartsService {
   async createPart(partInput: PartInput): Promise<Part> {
     return this.prisma.part.create({
       data: {
-        part_category_id: partInput.part_category_id,
+        partCategoryId: partInput.partCategoryId,
         name: partInput.name,
-        image_url: partInput.image_url,
-        default_generated_quantity: partInput.default_generated_quantity,
+        imageUrl: partInput.imageUrl,
+        defaultGeneratedQuantity: partInput.defaultGeneratedQuantity,
       },
     });
   }
@@ -38,7 +38,7 @@ export class PartsService {
       },
       data: {
         name: partInput.name,
-        image_url: partInput.image_url,
+        imageUrl: partInput.imageUrl,
       },
     });
   }
